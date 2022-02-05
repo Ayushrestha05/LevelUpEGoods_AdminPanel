@@ -82,6 +82,15 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('admin-home') }}" class="{{ request()->is('admin/report-question') ? 'nav-link active' : 'nav-link' }}">
+              <i class="nav-icon fas fa-question"></i>
+              <p>
+                Report Questions
+                {{-- <span class="right badge badge-danger">New</span> --}}
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
