@@ -74,7 +74,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="{{ route('admin-home') }}" class="{{ request()->is('admin/home') ? 'nav-link active' : 'nav-link' }}">
+            <a href="{{ route('admin.admin-home') }}" class="{{ request()->is('admin/home') ? 'nav-link active' : 'nav-link' }}">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Dashboard
@@ -83,7 +83,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('admin-home') }}" class="{{ request()->is('admin/report-question') ? 'nav-link active' : 'nav-link' }}">
+            <a href="{{ route('admin.report-question.index') }}" class="{{ request()->is('admin/report-question*') ? 'nav-link active' : 'nav-link' }}">
               <i class="nav-icon fas fa-question"></i>
               <p>
                 Report Questions
