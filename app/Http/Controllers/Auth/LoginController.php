@@ -47,7 +47,7 @@ class LoginController extends Controller
         ]);
         if(auth()->attempt(array('email'=>$input['email'],'password'=>$input['password']))){
             if(auth()->user()->is_admin == 1){
-                return redirect()->route('admin-home');
+                return redirect()->route('admin.admin-home');
             }else{
                 return redirect()->route('login')->with('error','No Admin Access');
             }
