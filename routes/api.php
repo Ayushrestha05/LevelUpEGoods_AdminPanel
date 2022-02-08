@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\API\AuthAPIController;
+use App\Http\Controllers\API\ReportQuestionAPIController;
+use App\Models\ReportQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/report-questions', function(){
-    return 'Report Questions';
-});
+Route::get('/report-questions', [ReportQuestionAPIController::class, 'index']);
+
+Route::post('/login', [AuthAPIController::class, 'login']);
+Route::post('/register', [AuthAPIController::class, 'register']);
+Route::post('/logout', [AuthAPIController::class, 'logout']);
