@@ -38,7 +38,7 @@ class ReportQuestionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'question' => 'required'
+            'question_category' => 'required'
         ]);
 
         ReportQuestion::create($request->all());
@@ -79,7 +79,7 @@ class ReportQuestionController extends Controller
     {
 
         $request->validate([
-            'question' => 'required|string'
+            'question_category' => 'required|string'
         ]);
         
         $report_question->update($request->all());

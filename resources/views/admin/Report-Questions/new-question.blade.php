@@ -7,7 +7,7 @@
 <div class="col mt-1 d-flex flex-column">
     <div class="card card-primary ">
         <div class="card-header">
-          <h3 class="card-title">New Question</h3>
+          <h3 class="card-title">New Question Category</h3>
         </div>
         @if ($errors->any())
         <div class="alert alert-danger m-2">
@@ -26,7 +26,7 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Question</label>
-                    <input type="text" class="form-control" name="question" placeholder="Enter Question">
+                    <input type="text" class="form-control" name="question_category" placeholder="Enter Question">
                 </div>
             </div>
           <!-- /.card-body -->

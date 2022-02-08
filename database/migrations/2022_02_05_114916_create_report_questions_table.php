@@ -15,7 +15,7 @@ class CreateReportQuestionsTable extends Migration
     {
         Schema::create('report_questions', function (Blueprint $table) {
             $table->id();
-            $table->string('question');
+            $table->string('question_category');
             $table->timestamps();
         });
     }
