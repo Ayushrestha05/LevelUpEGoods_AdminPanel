@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Session;
-
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class AuthAPIController extends Controller
 {
@@ -27,7 +25,7 @@ class AuthAPIController extends Controller
             'password' => bcrypt($fields['password'])
         ]);
 
-        $token = $user->createToken('registertoken')->plainTextToken;
+        $token = $user->createToken('mytoken')->plainTextToken;
 
         $response = [
             'user' => $user,
@@ -53,7 +51,7 @@ class AuthAPIController extends Controller
         }
         
 
-        $token = $user->createToken('logintoken')->plainTextToken;
+        $token = $user->createToken('mytoken')->plainTextToken;
 
         $response = [
             'user' => $user,
@@ -65,15 +63,7 @@ class AuthAPIController extends Controller
 
     //Logout Function
     public function logout(Request $request){
-        if ($request->user()) { 
-            $request->user()->tokens()->revoke();
-            return [
-                'message' => 'Logged out'
-            ];
-        }else{
-            return [
-                'message' => 'User hasn\'t logged in'
-            ];
-        }        
+        $request->user()->tokens()->delete();
+        return response(['message' => 'Successfully logged out']);
     }
 }
