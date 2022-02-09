@@ -15,6 +15,6 @@ class ReportQuestionAPIController extends Controller
      */
     public function index()
     {
-        return ReportQuestion::all();
+        return ReportQuestion::orderBy('created_at', 'desc')->get();
     }
 }
