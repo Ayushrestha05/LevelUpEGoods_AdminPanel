@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\ReportQuestion;
+use Facade\FlareClient\Report;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -14,9 +16,8 @@ class ReportQuestionDefaultSeeder extends Seeder
      */
     public function run()
     {
-        ##TODO: Update Admin Seeder
-        DB::table('report_questions')->insert([
-            'id'=> 1,
+
+        ReportQuestion::create([
             'question_category' => 'Others',
         ]);
     }
