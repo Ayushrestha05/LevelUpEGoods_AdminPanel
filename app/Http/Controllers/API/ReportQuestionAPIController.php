@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\ReportQuestion;
+use App\Models\ReportQuestionType;
 use Illuminate\Http\Request;
 
 class ReportQuestionAPIController extends Controller
@@ -15,6 +15,6 @@ class ReportQuestionAPIController extends Controller
      */
     public function index()
     {
-        return ReportQuestion::orderBy('created_at', 'desc')->get();
+        return ReportQuestionType::orderBy('created_at', 'desc')->get();
     }
 }

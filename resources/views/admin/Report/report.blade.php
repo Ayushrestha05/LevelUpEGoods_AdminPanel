@@ -24,8 +24,8 @@
                                 @foreach ($reports as $report )
                                 <tr>
                                     <td>{{ $report->id }}</td>
-                                    <td>{{ $report->user_id }}</td>
-                                    <td>{{ $report->report_category }}</td>  
+                                    <td>{{ $report->user->name }}</td>
+                                    <td>{{ $report->reporttype->question_type }}</td>  
                                     <td>{{ $report->title }}</td>
                                     <td>
                                         <div class="mr-1">

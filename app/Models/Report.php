@@ -15,4 +15,9 @@ class Report extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function reporttype()
+    {
+        return $this->belongsTo(ReportQuestionType::class, 'question_type');
+    }
 }

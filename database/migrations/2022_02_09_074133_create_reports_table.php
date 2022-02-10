@@ -16,12 +16,12 @@ class CreateReportsTable extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('report_category')->unsigned();
+            $table->bigInteger('question_type')->unsigned();
             $table->string('title');
             $table->text('description');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('report_category')->references('id')->on('report_questions')->onDelete('cascade');
+            $table->foreign('question_type')->references('id')->on('report_question_type')->onDelete('cascade');
         });
     }
 

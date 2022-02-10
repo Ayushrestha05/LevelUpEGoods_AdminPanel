@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ReportQuestion;
+use App\Models\ReportQuestionType;
 use Illuminate\Http\Request;
 
-class ReportQuestionController extends Controller
+class ReportQuestionTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class ReportQuestionController extends Controller
      */
     public function index()
     {
-        $report_questions = ReportQuestion::all();
+        $report_questions = ReportQuestionType::all();
         return view('admin.Report-Questions.report-questions', compact('report_questions'));
 
     }
@@ -38,10 +38,10 @@ class ReportQuestionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'question_category' => 'required'
+            'question_type' => 'required'
         ]);
 
-        ReportQuestion::create($request->all());
+        ReportQuestionType::create($request->all());
         return redirect()->route('admin.report-question.index')->with('success', 'Question Added Successfully');
     }
 
@@ -64,7 +64,7 @@ class ReportQuestionController extends Controller
      */
     public function edit($id)
     {
-        $question = ReportQuestion::all()->where('id', $id)->first();
+        $question = ReportQuestionType::all()->where('id', $id)->first();
         return view('admin.Report-Questions.edit-question', compact('question'));
     }
 
@@ -75,11 +75,11 @@ class ReportQuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ReportQuestion $report_question)
+    public function update(Request $request, ReportQuestionType $report_question)
     {
 
         $request->validate([
-            'question_category' => 'required|string'
+            'question_type' => 'required|string'
         ]);
         
         $report_question->update($request->all());
@@ -92,7 +92,7 @@ class ReportQuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ReportQuestion $report_question)
+    public function destroy(ReportQuestionType $report_question)
     {
         $report_question->delete();  
         return redirect()->route('admin.report-question.index')->with('success', 'Question Deleted Successfully');      

@@ -27,6 +27,6 @@ Auth::routes();
 
 Route::prefix('admin')->name('admin.')->middleware('is_admin')->group(function () {
     Route::get('/home',[\App\Http\Controllers\HomeController::class, 'adminHome'])->name('admin-home');
-    Route::resource('/report/report-question',\App\Http\Controllers\ReportQuestionController::class);
+    Route::resource('/report/report-question',\App\Http\Controllers\ReportQuestionTypeController::class);
     Route::resource('/report/user-reports',\App\Http\Controllers\ReportController::class);
 });

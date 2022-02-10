@@ -13,7 +13,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header d-flex flex-column">
-                    <h3 class="mb-3">Report Questions Categories</h3>
+                    <h3 class="mb-3">Report Question Types</h3>
                     <a href="{{ route('admin.report-question.create') }}"><button class="btn btn-primary btn-lg" >Create a Question Category</button></a>
                 </div>
                 
@@ -30,7 +30,7 @@
                             @foreach ($report_questions as $question )
                             <tr>
                                 <td>{{ $question->id}}</td>
-                                <td>{{ $question->question_category }}</td>
+                                <td>{{ $question->question_type }}</td>
                                 <td>
                                     <div class="d-flex">
                                         <div class="mr-1">

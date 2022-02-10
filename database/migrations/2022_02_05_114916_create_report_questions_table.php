@@ -13,9 +13,9 @@ class CreateReportQuestionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('report_questions', function (Blueprint $table) {
+        Schema::create('report_question_type', function (Blueprint $table) {
             $table->id();
-            $table->string('question_category');
+            $table->string('question_type');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateReportQuestionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('report_questions');
+        Schema::dropIfExists('report_question_type');
     }
 }

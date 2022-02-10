@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\ReportQuestion;
+use App\Models\ReportQuestionType;
 use Facade\FlareClient\Report;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -17,8 +17,8 @@ class ReportQuestionDefaultSeeder extends Seeder
     public function run()
     {
 
-        ReportQuestion::create([
-            'question_category' => 'Others',
+        ReportQuestionType::create([
+            'question_type' => 'Others',
         ]);
     }
 }
