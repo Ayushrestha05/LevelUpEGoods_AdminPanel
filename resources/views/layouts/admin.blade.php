@@ -82,15 +82,31 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="{{ route('admin.report-question.index') }}" class="{{ request()->is('admin/report-question*') ? 'nav-link active' : 'nav-link' }}">
+          <li class="nav-item menu-open">
+            <a href="#" class="{{ request()->is('admin/report*') ? 'nav-link active' : 'nav-link' }}">
               <i class="nav-icon fas fa-question"></i>
               <p>
-                Report Questions
-                {{-- <span class="right badge badge-danger">New</span> --}}
+                Reports
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-          </li>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.user-reports.index') }}" class="{{ request()->is('admin/report/user-reports*') ? 'nav-link active' : 'nav-link' }}">
+                  <i class="nav-icon fas fa-question"></i>
+                  <p>User Reports</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.report-question.index') }}" class="{{ request()->is('admin/report/report-question*') ? 'nav-link active' : 'nav-link' }}">
+                  <i class="nav-icon fas fa-question"></i>
+                  <p>
+                    Report Questions
+                  </p>
+                </a>
+              </li>
+            </ul>
+          </li>    
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
