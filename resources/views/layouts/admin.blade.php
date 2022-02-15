@@ -11,6 +11,10 @@
   <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('AdminLTE/dist/css/adminlte.min.css') }}">
+  <!-- Google Font: Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700&display=swap" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini">
 
@@ -75,14 +79,22 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item">
             <a href="{{ route('admin.admin-home') }}" class="{{ request()->is('admin/home') ? 'nav-link active' : 'nav-link' }}">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fas fa-align-justify"></i>
               <p>
                 Dashboard
                 {{-- <span class="right badge badge-danger">New</span> --}}
               </p>
             </a>
           </li>
-          <li class="nav-item menu-open">
+          <li class="nav-item">
+            <a href="{{ route('admin.categories.index') }}" class="{{ request()->is('admin/categories*') ? 'nav-link active' : 'nav-link' }}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Categories
+              </p>
+            </a>
+          </li>
+          <li class="nav-item menu-closed">
             <a href="#" class="{{ request()->is('admin/report*') ? 'nav-link active' : 'nav-link' }}">
               <i class="nav-icon fas fa-question"></i>
               <p>
@@ -150,12 +162,14 @@
 </form>
 
 <!-- REQUIRED SCRIPTS -->
-
 <!-- jQuery -->
 <script src="{{ asset('AdminLTE/plugins/jquery/jquery.min.js') }}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('AdminLTE/dist/js/adminlte.min.js') }}"></script>
+<!-- bs-custom-file-input -->
+<script src="{{ asset('AdminLTE/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
+
 </body>
 </html>
