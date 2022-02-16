@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(AdminSeeder::class);
         $this->call(ReportQuestionDefaultSeeder::class);
+        $this->call(CategorySeeder::class);
     }
 }
