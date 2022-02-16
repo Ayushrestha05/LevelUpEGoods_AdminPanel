@@ -94,7 +94,25 @@
               </p>
             </a>
           </li>
-          <li class="nav-item menu-closed">
+          <li class="nav-item {{ request()->is('admin/items*') ? 'menu-open' : 'menu-close' }}">
+            <a href="#" class="{{ request()->is('admin/items*') ? 'nav-link active' : 'nav-link' }}">
+              <i class="nav-icon fas fa-shopping-cart"></i>
+              <p>
+                Items
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.music.index') }}" class="{{ request()->is('admin/items/music*') ? 'nav-link active' : 'nav-link' }}">
+                  <i class="nav-icon fas fa-music"></i>
+                  <p>Music</p>
+                </a>
+              </li>
+          
+            </ul>
+          </li>
+          <li class="nav-item {{ request()->is('admin/report*') ? 'menu-open' : 'menu-close' }}">
             <a href="#" class="{{ request()->is('admin/report*') ? 'nav-link active' : 'nav-link' }}">
               <i class="nav-icon fas fa-question"></i>
               <p>
@@ -170,6 +188,10 @@
 <script src="{{ asset('AdminLTE/dist/js/adminlte.min.js') }}"></script>
 <!-- bs-custom-file-input -->
 <script src="{{ asset('AdminLTE/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
-
+<script>
+  $(function () {
+    bsCustomFileInput.init();
+  });
+</script>
 </body>
 </html>
