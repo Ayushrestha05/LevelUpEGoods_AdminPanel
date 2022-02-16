@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\API\AuthAPIController;
 use App\Http\Controllers\API\CategoriesAPIController;
+use App\Http\Controllers\API\ItemAPIController;
+use App\Http\Controllers\API\MusicAPIController;
 use App\Http\Controllers\API\ReportQuestionAPIController;
 use App\Http\Controllers\API\UserReportAPIController;
 use Illuminate\Http\Request;
@@ -27,6 +29,7 @@ Route::get('/report-questions', [ReportQuestionAPIController::class, 'index']);
 Route::post('/login', [AuthAPIController::class, 'login']);
 Route::post('/register', [AuthAPIController::class, 'register']);
 Route::get('/categories', [CategoriesAPIController::class, 'index']);
+Route::get('/items/category/{category_id}', [ItemAPIController::class, 'getItems']);
 
 //Private API Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
