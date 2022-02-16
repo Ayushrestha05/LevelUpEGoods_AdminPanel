@@ -30,4 +30,5 @@ Route::prefix('admin')->name('admin.')->middleware('is_admin')->group(function (
     Route::resource('/report/report-question',\App\Http\Controllers\ReportQuestionTypeController::class);
     Route::resource('/report/user-reports',\App\Http\Controllers\ReportController::class);
     Route::resource('/categories',\App\Http\Controllers\CategoriesController::class);
+    Route::resource('/items/music',\App\Http\Controllers\MusicController::class);
 });
