@@ -30,6 +30,7 @@ Route::post('/login', [AuthAPIController::class, 'login']);
 Route::post('/register', [AuthAPIController::class, 'register']);
 Route::get('/categories', [CategoriesAPIController::class, 'index']);
 Route::get('/items/category/{category_id}', [ItemAPIController::class, 'getItems']);
+Route::get('/items/music-data/{item_id}', [ItemAPIController::class, 'getMusicData']);
 
 //Private API Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
