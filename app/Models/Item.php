@@ -13,4 +13,8 @@ class Item extends Model
     public function Music(){
         return $this->hasOneThrough(Music::class,Item::class,'id','item_id');
     }
+
+    public function MusicTracks(){
+        return $this->hasManyThrough(MusicTrack::class,Item::class,'id','item_id');
+    }
 }
