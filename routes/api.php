@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\AuthAPIController;
+use App\Http\Controllers\API\CartAPIController;
 use App\Http\Controllers\API\CategoriesAPIController;
 use App\Http\Controllers\API\ItemAPIController;
 use App\Http\Controllers\API\MusicAPIController;
@@ -31,9 +32,17 @@ Route::post('/register', [AuthAPIController::class, 'register']);
 Route::get('/categories', [CategoriesAPIController::class, 'index']);
 Route::get('/items/category/{category_id}', [ItemAPIController::class, 'getItems']);
 Route::get('/items/music-data/{item_id}', [ItemAPIController::class, 'getMusicData']);
+Route::get('/items/gift-card-data/{item_id}', [ItemAPIController::class, 'getGiftCardData']);
 
 //Private API Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthAPIController::class, 'logout']);
     Route::post('/submit-report', [UserReportAPIController::class, 'submitReport']);
+    Route::prefix('cart')->group(function(){
+        Route::post('/add',[CartAPIController::class, 'addToCart']);
+        Route::get('/get', [CartAPIController::class, 'getCart']);
+        Route::post('/remove', [CartAPIController::class, 'removeFromCart']);
+        Route::post('/increase', [CartAPIController::class, 'increaseQuantity']);
+        Route::post('/decrease', [CartAPIController::class, 'decreaseQuantity']);
+    });
 });
