@@ -109,7 +109,14 @@
                   <p>Music</p>
                 </a>
               </li>
-          
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.gift-card.index') }}" class="{{ request()->is('admin/items/gift-card*') ? 'nav-link active' : 'nav-link' }}">
+                  <i class="nav-icon fas fa-gift"></i>
+                  <p>Gift Cards</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item {{ request()->is('admin/report*') ? 'menu-open' : 'menu-close' }}">

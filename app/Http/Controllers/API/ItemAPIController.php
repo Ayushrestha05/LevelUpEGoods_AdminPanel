@@ -60,8 +60,39 @@ class ItemAPIController extends Controller
 
             return response($response,200);
             
-        }
-            
-            
+        }   
     }    
+
+    public function getGiftCardData($item_id){
+        $item = Item::all()->where('id', $item_id)->first();
+        $response = [];
+        if($item->category_id != 1){
+            return response(['error' => 'Not a Gift Card Item'],400);
+        }else{
+            $item_details = [
+                'id' => $item->id, 
+                'category_id' => $item->category_id,
+                'item_name' => $item->item_name,
+                'item_description' => $item->item_description,
+                'item_image' => asset('images/items/'.$item->item_image),
+            ];
+
+            $gift_card_details = [];
+            foreach($item->GiftCard as $gift_card){
+                array_push($gift_card_details,[
+                    'id' => $gift_card->id, 
+                    'card_type' => $gift_card->card_type,
+                    'card_price' => $gift_card->card_price,
+                ]);
+            }
+
+            array_push($response,[
+                'item_details' => $item_details,
+                'gift_card_details' => $gift_card_details,
+            ]);
+
+            return response($response,200);
+            
+        }   
+    }
 }
