@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 class CartAPIController extends Controller
 {
     public function addToCart(Request $request){
+        
         $user_id = auth()->user()->id;
         //Create a Cart if no cart was found
         if(Cart::all()->where('user_id', $user_id)->first() == null){
@@ -18,17 +19,41 @@ class CartAPIController extends Controller
             $cart->save();
         }
 
-        $cart_id = Cart::all()->where('user_id', $user_id)->first()->id;
-        $cart_item = new CartItems([
-            'cart_id' => $cart_id,
-            'item_id' => $request->item_id,
-            'quantity' => 1,
-            'option' => $request->option,
-        ]);
+        $cart = Cart::all()->where('user_id', $user_id)->first();
+        $existItem = $cart->cartItems->where('item_id',$request->item_id);
+        if($existItem->count() > 0){
+            $item = $existItem->where('option',$request->option)->first();
+            if($item != null){
+                $item->quantity += 1;
+                $item->save();
 
-        $cart_item->save();
+                return response()->json(['message' => 'Quantity added by 1'], 201);
+            }else{
+                $cart_item = new CartItems([
+                    'cart_id' => $cart->id,
+                    'item_id' => (int)$request->item_id,
+                    'quantity' => 1,
+                    'option' => $request->option,
+                ]);
+                $cart_item->save();
+                
+                return response()->json(['message' => 'Item added to cart'], 201);
+            }
+            
+        }else{
+            $cart_item = new CartItems([
+                'cart_id' => $cart->id,
+                'item_id' => (int)$request->item_id,
+                'quantity' => 1,
+                'option' => $request->option,
+            ]);
+            $cart_item->save();
 
-        return response()->json(['message' => 'Item added to cart'], 201);
+            return response()->json(['message' => 'Item added to cart'], 201);
+        }
+        
+
+
     }
 
     public function getCart(Request $request){
@@ -49,18 +74,18 @@ class CartAPIController extends Controller
                     'quantity' => $cart_item->quantity,
                     'option' => $cart_item->option,
                 ]);
-
+                
                 $total_price += $this->getItemPrice($cart_item,$cart_item->option) * $cart_item->quantity;
-        }
-
-
-
-        $response = [
-            'items' => $items,
-            'total_price' => $total_price
-        ];
-    
-        return response($response, 200);
+            }
+            
+            
+            
+            $response = [
+                'items' => $items,
+                'total_price' => $total_price
+            ];
+            
+            return response($response, 200);
         }
     }
 
