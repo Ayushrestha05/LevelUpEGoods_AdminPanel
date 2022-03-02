@@ -19,6 +19,7 @@ class CreateItemsTable extends Migration
             $table->string('item_name');
             $table->text('item_description')->nullable();
             $table->string('item_image');
+            $table->string('additional')->nullable();
             $table->timestamps();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
