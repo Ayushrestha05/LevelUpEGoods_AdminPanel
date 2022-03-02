@@ -95,4 +95,41 @@ class ItemAPIController extends Controller
             
         }   
     }
+
+    public function getFigurineData($item_id){
+        $item = Item::all()->where('id', $item_id)->first();
+
+        if($item->category_id != 3){
+            return response(['error' => 'Not a Figurine Item'],400);
+        }else{
+            $item_details = [
+                'id' => $item->id, 
+                'category_id' => $item->category_id,
+                'item_name' => $item->item_name,
+                'item_image' => asset('images/items/'.$item->item_image),
+            ];
+
+            $figurine_details = [
+                'figurine_height' => $item->Figurine->figure_height,
+                'price' => $item->Figurine->figure_price,
+                'description' => $item->Figurine->figure_description,
+            ];
+
+            $figurine_images = [];
+            foreach($item->FigurineImages as $figurine_image){
+                array_push($figurine_images,
+                    asset('images/figurines/'.$figurine_image->image_path),
+                );
+            }
+        }
+
+
+        $response = [
+            'item_details' => $item_details,
+            'figurine_details' => $figurine_details,
+            'figurine_images' => $figurine_images,
+            
+        ];
+        return response($response,200);
+    }
 }
