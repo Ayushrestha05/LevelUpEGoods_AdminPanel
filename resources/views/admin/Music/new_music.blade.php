@@ -125,10 +125,20 @@
     var i = 0;
     $("#dynamic-ar").click(function () {
         ++i;
-        $("#dynamicAddRemove").append('<tr><td><input type="text" class="form-control" name="album['+i+'][name]" placeholder="Enter Track Name"></td><td><input type="text" class="form-control" name="album['+i+'][time]" placeholder="Enter Track Time (MM:SS)"></td><td><div class="form-group mr-2"><div class="custom-file w-100 mb-3"><input type="file" class="custom-file-input" id="album_file" name="album['+i+'][file]"><label class="custom-file-label" for="category_image" id="labelvalue">Choose file</label></div></div></td><td><button type="button" class="btn btn-danger remove-input-field">Delete</button></td></tr>');
+        $("#dynamicAddRemove").append('<tr><td><input type="text" class="form-control" name="album['+i+'][name]" placeholder="Enter Track Name"></td><td><input type="text" class="form-control" name="album['+i+'][time]" placeholder="Enter Track Time (MM:SS)"></td><td><div class="form-group mr-2"><div class="custom-file w-100 mb-3"><input type="file" class="custom-file-input" id="album_file" name="album['+i+'][file]"><label class="custom-file-label" for="category_image" id="labelvalue['+i+']">Choose file</label></div></div></td><td><button type="button" class="btn btn-danger remove-input-field">Delete</button></td></tr>');
+        
+        $('input[type="file"]').change(function(e) {
+            var fileName = e.target.files[0].name;
+            //replace the file name from the input field
+            $(this).next('.custom-file-label').html(fileName);
+
+        });
     });
+
     $(document).on('click', '.remove-input-field', function () {
         $(this).parents('tr').remove();
     });
+    
+
 </script>
 @endsection

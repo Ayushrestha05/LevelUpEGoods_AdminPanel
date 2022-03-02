@@ -50,7 +50,7 @@
             
             <div class="card card-primary m-3">
                 <div class="card-header">
-                    <h3 class="card-title">Album Contents</h3>
+                    <h3 class="card-title">Card Contents</h3>
                 </div>
                 <div class="card-body d-flex flex-column" id="album_content">
                     <table class="table table-bordered" id="dynamicAddRemove">
