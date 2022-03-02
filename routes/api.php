@@ -33,6 +33,8 @@ Route::get('/categories', [CategoriesAPIController::class, 'index']);
 Route::get('/items/category/{category_id}', [ItemAPIController::class, 'getItems']);
 Route::get('/items/music-data/{item_id}', [ItemAPIController::class, 'getMusicData']);
 Route::get('/items/gift-card-data/{item_id}', [ItemAPIController::class, 'getGiftCardData']);
+Route::get('/items/figurine-data/{item_id}', [ItemAPIController::class, 'getFigurineData']);
+Route::get('/items/illustration-data/{item_id}', [ItemAPIController::class, 'getIllustrationData']);
 
 //Private API Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {

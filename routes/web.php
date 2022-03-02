@@ -32,4 +32,6 @@ Route::prefix('admin')->name('admin.')->middleware('is_admin')->group(function (
     Route::resource('/categories',\App\Http\Controllers\CategoriesController::class);
     Route::resource('/items/music',\App\Http\Controllers\MusicController::class);
     Route::resource('/items/gift-card',\App\Http\Controllers\GiftCardController::class);
+    Route::resource('/items/figurine',\App\Http\Controllers\FigurineController::class);
+    Route::resource('/items/illustrations',\App\Http\Controllers\IllustrationController::class);
 });
