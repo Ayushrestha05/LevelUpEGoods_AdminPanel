@@ -111,14 +111,17 @@ class ItemAPIController extends Controller
 
             $figurine_details = [
                 'figurine_height' => $item->Figurine->figure_height,
+                'figurine_dimension' => $item->Figurine->figure_dimension,
                 'price' => $item->Figurine->figure_price,
                 'description' => $item->Figurine->figure_description,
             ];
 
             $figurine_images = [];
-            foreach($item->FigurineImages as $figurine_image){
+            $images = explode('|',$item->FigurineImages->image_path);
+         
+            foreach($images as $figurine_image){
                 array_push($figurine_images,
-                    asset('images/figurines/'.$figurine_image->image_path),
+                    asset('images/figurines/'.$figurine_image),
                 );
             }
         }
@@ -131,5 +134,51 @@ class ItemAPIController extends Controller
             
         ];
         return response($response,200);
+    }
+
+    public function getIllustrationData($item_id){
+        $item = Item::all()->where('id', $item_id)->first();
+        if($item->category_id != 2){
+            return response(['error' => 'Not a Illustration Item'],400);
+        }else{
+            $item_details = [
+                'id' => $item->id, 
+                'category_id' => $item->category_id,
+                'item_name' => $item->item_name,
+                'item_image' => asset('images/illustration/'.$item->item_image),
+            ];
+
+            
+            if($item->Illustration->user_id != null){
+                $illustration_details = [
+                    'illustration_description' => $item->Illustration->illustration_description,
+                    'user_id' => $item->Illustration->user_id,
+                    'user_name' => $item->Illustration->User->name,
+                    'creator' => $item->Illustration->creator,
+                ];
+            }else{
+                $illustration_details = [
+                    'illustration_description' => $item->Illustration->description,
+                    'user_id' => null,
+                    'user_name' => '',
+                    'creator' => $item->Illustration->creator,
+                ];
+            }
+
+            $illustration_prices = [];
+    
+            foreach($item->IllustrationPrice as $illustration_price){
+                array_push($illustration_prices,[ 
+                    'price' => $illustration_price->price,
+                    'size' => $illustration_price->size,
+                ]);
+            }
+
+            return response([
+                'item_details' => $item_details,
+                'illustration_details' => $illustration_details,
+                'illustration_prices' => $illustration_prices,
+            ],200);
+        }
     }
 }
