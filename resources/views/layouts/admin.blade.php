@@ -15,6 +15,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700&display=swap" rel="stylesheet">
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/select2/css/select2.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 </head>
 <body class="hold-transition sidebar-mini">
 
@@ -104,9 +107,9 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('admin.music.index') }}" class="{{ request()->is('admin/items/music*') ? 'nav-link active' : 'nav-link' }}">
-                  <i class="nav-icon fas fa-music"></i>
-                  <p>Music</p>
+                <a href="{{ route('admin.figurine.index') }}" class="{{ request()->is('admin/items/figurine*') ? 'nav-link active' : 'nav-link' }}">
+                  <i class="nav-icon fab fa-jenkins"></i>
+                  <p>Figurines</p>
                 </a>
               </li>
             </ul>
@@ -118,6 +121,22 @@
                 </a>
               </li>
             </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.illustrations.index') }}" class="{{ request()->is('admin/items/illustrations*') ? 'nav-link active' : 'nav-link' }}">
+                  <i class="nav-icon fas fa-image"></i>
+                  <p>Illustrations</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.music.index') }}" class="{{ request()->is('admin/items/music*') ? 'nav-link active' : 'nav-link' }}">
+                  <i class="nav-icon fas fa-music"></i>
+                  <p>Music</p>
+                </a>
+              </li>
+            </ul>            
           </li>
           <li class="nav-item {{ request()->is('admin/report*') ? 'menu-open' : 'menu-close' }}">
             <a href="#" class="{{ request()->is('admin/report*') ? 'nav-link active' : 'nav-link' }}">
