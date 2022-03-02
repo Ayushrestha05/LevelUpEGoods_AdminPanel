@@ -71,8 +71,11 @@ class CartAPIController extends Controller
                 array_push($items, [
                     'cart_item_id' => $cart_item->id,
                     'item_id' => $cart_item->item_id,
+                    'item_name' => $cart_item->Item->item_name,
+                    'item_image' => asset('images/items/'.$cart_item->Item->item_image),
                     'quantity' => $cart_item->quantity,
                     'option' => $cart_item->option,
+                    'current_price' => $this->getItemPrice($cart_item,$cart_item->option) * $cart_item->quantity,
                 ]);
                 
                 $total_price += $this->getItemPrice($cart_item,$cart_item->option) * $cart_item->quantity;
@@ -89,8 +92,13 @@ class CartAPIController extends Controller
         }
     }
 
-    private static function getItemPrice(CartItems $cartItem, String $option){
+    private static function getItemPrice(CartItems $cartItem, $option){
         switch($cartItem->Item->category_id){
+            case 1:
+                return $cartItem->Item->GiftCard->where('card_type', $option)->first()->card_price;
+
+            case 3:
+                return $cartItem->Item->Figurine->figure_price;
             case 7:
                 if($option == 'physical'){
                     return $cartItem->Item->Music->physical_price;
