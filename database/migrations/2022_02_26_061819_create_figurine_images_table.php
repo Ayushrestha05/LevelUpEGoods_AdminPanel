@@ -16,7 +16,7 @@ class CreateFigurineImagesTable extends Migration
         Schema::create('figurine_images', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('item_id');
-            $table->string('image_path');
+            $table->text('image_path');
             $table->timestamps();
             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
         });
