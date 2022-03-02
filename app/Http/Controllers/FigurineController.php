@@ -37,16 +37,17 @@ class FigurineController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {    
         $request->validate([
             'figurineName' => 'required|string',
             'figurineDescription' => 'required|string',
-            'figurineHeight' => 'required|string',
+            'figurineHeight' => 'required_if:figurineDimension,==,null',
+            'figurineDimension' => 'required_if:figurineHeight,==,null',
             'figurinePrice' => 'required|numeric',
-            'figurine.*.file' => 'required|max:2048',
+            'figurineImage' => 'required',
         ]);
 
-        $itemImage = time().preg_replace('/\s+/', '', $request->figurineImage->getClientOriginalName()).'.'.$request->figurineImage->getClientOriginalExtension();
+        $itemImage = time().preg_replace('/\s+/', '', $request->figurineImage->getClientOriginalName());
         $request->figurineImage->move(public_path('images/items'), $itemImage);
 
         //Create a new Item
@@ -63,24 +64,33 @@ class FigurineController extends Controller
         $figurine = new Figurine([
             'item_id' => $item_id,
             'figure_height' => $request->figurineHeight,
+            'figure_dimension' => $request->figurineDimension,
             'figure_price' => $request->figurinePrice,
             'figure_description' => $request->figurineDescription,
         ]);
 
         $figurine->save();
 
+        $image = [];
+        //Seperating Words from the Name of the Figurine
+        $name = explode(" ",$request->figurineName);
+        $i = 0;
         //Upload the images and save names into database
-        foreach($request->figurine as $image){
-            $imageName = time().preg_replace('/\s+/', '', $image['file']->getClientOriginalName()).'.'.$image['file']->getClientOriginalExtension();
-            $image['file']->move(public_path('images/figurines'), $imageName);
+        foreach($request->file('figurineImageFile') as $file){
+            ++$i;
+            //Add Time, Remove Special Characters from Name and Add Extension for a new File Name
+            $imageName = time().preg_replace('/[^A-Za-z0-9\-]/', '', $name[0]).$i.'.'.$file->getClientOriginalExtension();
+            $file->move(public_path('images/figurines'), $imageName);
+            $image[] = $imageName;
             
-            $figurineImage = new FigurineImages([
-                'item_id' => $item_id,
-                'image_path' => $imageName,
-            ]);
-
-            $figurineImage->save();
         }
+
+        $figurineImage = new FigurineImages([
+            'item_id' => $item_id,
+            'image_path' => implode('|', $image),
+        ]);
+
+        $figurineImage->save();
 
         return redirect()->route('admin.figurine.index')->with('success', 'Figurine Added successfully');
 

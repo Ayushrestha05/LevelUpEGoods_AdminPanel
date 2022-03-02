@@ -16,7 +16,8 @@ class CreateFigurinesTable extends Migration
         Schema::create('figurines', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('item_id');
-            $table->string('figure_height');
+            $table->string('figure_height')->nullable();
+            $table->string('figure_dimension')->nullable();
             $table->double('figure_price');
             $table->text('figure_description');
             $table->timestamps();

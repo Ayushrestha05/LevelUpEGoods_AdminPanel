@@ -42,6 +42,10 @@
                         <label for="figurineHeight">Figurine Height</label>
                         <input type="text" class="form-control" name="figurineHeight" placeholder="Enter Figurine Height">
                     </div>
+                    <div class="form-group">
+                        <label for="figurineDimension">Figurine Dimension</label>
+                        <input type="text" class="form-control" name="figurineDimension" placeholder="Enter Figurine's Dimensions">
+                    </div>
                     <div class="form-group mr-2">
                         <label for="figurineHeight">Figurine Image</label>
                         <div class="custom-file w-100 mb-3">
@@ -62,27 +66,12 @@
                 <div class="card-header">
                     <h3 class="card-title">Figurine Images</h3>
                 </div>
-                <div class="card-body d-flex flex-column" id="album_content">
-                    <table class="table table-bordered" id="dynamicAddRemove">
-                        <tr>
-                            <th>Figure Image File</th>
-                            <th>Image Preview</th>
-                            <th>Action</th>
-                        </tr>
-                        <tr>                         
-                            <td>
-                                <div class="form-group mr-2">
-                                    <div class="custom-file w-100 mb-3">
-                                        <input type="file" class="custom-file-input" id="fig_image_file" name="figurine[0][file]" onchange="loadFile(event)">
-                                        <label class="custom-file-label" id="labelvalue">Choose file</label>
-                                    </div>
-                                </div>
-                            </td>
-                            <td><img id='figurineIMG0' height=200 width=200></td>
-                            <td><button type="button" name="add" id="dynamic-ar" class="btn btn-primary"><i class="right fas fa-plus mr-2"></i>Add Image</button></td>
-                        </tr>
-                    </table>
+                <div class="form-group p-3">
+                <div class="custom-file w-100 mb-3">
+                    <input type="file" class="custom-file-input" id="fig_image_file" multiple name="figurineImageFile[]">
+                    <label class="custom-file-label" id="labelvalue">Choose file</label>
                 </div>
+            </div>
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary" >Submit</button>
@@ -93,33 +82,5 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript">
-    var i = 0;
-    $("#dynamic-ar").click(function () {
-        ++i;
-        $("#dynamicAddRemove").append('<tr><td><div class="form-group mr-2"><div class="custom-file w-100 mb-3"><input type="file" class="custom-file-input" id="album_file" name="figurine['+i+'][file]"><label class="custom-file-label" for="category_image" id="labelvalue['+i+']">Choose file</label></div></div></td><td><img id="figurineIMG'+i+'" height=200 width=200></td><td><button type="button" class="btn btn-danger remove-input-field">Delete</button></td></tr>');
-        
-        $('input[type="file"]').change(function(e) {
-            var fileName = e.target.files[0].name;
-            //replace the file name from the input field
-            $(this).next('.custom-file-label').html(fileName);
-            var image = document.getElementById(`figurineIMG${i}`);
-            image.src = URL.createObjectURL(event.target.files[0]);
-
-
-        });
-    });
-
-    $(document).on('click', '.remove-input-field', function () {
-        $(this).parents('tr').remove();
-    });
-
-    var loadFile = function(event) {
-        var image = document.getElementById('figurineIMG0');
-        image.src = URL.createObjectURL(event.target.files[0]);
-    };
-    
-
-</script>
 
 @endsection
