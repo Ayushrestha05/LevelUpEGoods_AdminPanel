@@ -28,6 +28,14 @@ class Item extends Model
     }
 
     public function FigurineImages(){
-        return $this->hasManyThrough(FigurineImages::class,Item::class,'id','item_id');
+        return $this->hasOneThrough(FigurineImages::class,Item::class,'id','item_id');
+    }
+
+    public function Illustration(){
+        return $this->hasOneThrough(Illustration::class,Item::class,'id','item_id');
+    }
+
+    public function IllustrationPrice(){
+        return $this->hasManyThrough(IllustrationPrice::class,Item::class,'id','item_id');
     }
 }
