@@ -162,6 +162,14 @@
                 </a>
               </li>
             </ul>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.platforms.index') }}" class="{{ request()->is('admin/platforms') ? 'nav-link active' : 'nav-link' }}">
+              <i class="nav-icon fas fa-gamepad"></i>
+              <p>
+                Platforms
+              </p>
+            </a>
           </li>    
         </ul>
       </nav>
