@@ -36,9 +36,11 @@ class PlatformController extends Controller
      */
     public function store(Request $request)
     {
+    
         $request->validate([
             'name' => 'required|string',
             'icon' => 'required|mimes:svg',
+            'family' => 'required',
         ]);
 
         $imageName = time().'-'.$request->file('icon')->getClientOriginalName();
@@ -47,6 +49,7 @@ class PlatformController extends Controller
         $platform = new Platform([
             'name' => $request->get('name'),
             'icon_filename' => $imageName,
+            'platform_family' => $request->get('family'),
         ]);
 
         $platform->save();
@@ -96,6 +99,7 @@ class PlatformController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Platform::destroy($id);
+        return redirect()->route('admin.platforms.index')->with('success', 'Platform deleted successfully');
     }
 }

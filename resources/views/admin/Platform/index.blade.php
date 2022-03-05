@@ -22,6 +22,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Platform Name</th>
+                                <th>Platform Family</th>
                                 <th>Platform Icon</th>
                                 <th>Actions</th>
                             </tr>
@@ -31,6 +32,7 @@
                             <tr>
                                 <td>{{ $platform->id}}</td>
                                 <td>{{ $platform->name }}</td>
+                                <td>{{ $platform->platform_family }}</td>
                                 <td><img src={{ asset('images/platforms/'.$platform->icon_filename) }} height=100 width=100 style="object-fit:scale-down;"></td>
                                 <td>
                                     <div class="d-flex">

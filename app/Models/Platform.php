@@ -9,5 +9,5 @@ class Platform extends Model
 {
     use HasFactory;
     protected $table = 'platforms';
-    protected $fillable = ['name', 'icon_filename'];
+    protected $fillable = ['name', 'icon_filename','platform_family'];
 }

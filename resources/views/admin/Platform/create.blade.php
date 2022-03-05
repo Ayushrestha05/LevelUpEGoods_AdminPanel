@@ -34,6 +34,17 @@
                         <input type="text" class="form-control" name="name" placeholder="Enter Platform's Name">
                     </div>
                     <div class="form-group">
+                        <label for="album_name">Platform Family</label>
+                        <br>
+                        <select class="form-control" name='family'>
+                            <option value="">Select a Platform Family....</option>
+                            <option value="playstation">Playstation</option>
+                            <option value="nintendo">Nintendo</option>
+                            <option value="xbox">Xbox</option>
+                            <option value="others">Others</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="album_artist">Platform Icon</label>
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="icon" name='icon' onchange="onChange(event)">
