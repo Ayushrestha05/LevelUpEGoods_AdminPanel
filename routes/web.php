@@ -35,4 +35,5 @@ Route::prefix('admin')->name('admin.')->middleware('is_admin')->group(function (
     Route::resource('/items/figurine',\App\Http\Controllers\FigurineController::class);
     Route::resource('/items/illustrations',\App\Http\Controllers\IllustrationController::class);
     Route::resource('/platforms',\App\Http\Controllers\PlatformController::class);
+    Route::resource('/items/games',\App\Http\Controllers\GameController::class);
 });

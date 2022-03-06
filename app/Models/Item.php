@@ -11,6 +11,11 @@ class Item extends Model
     protected $table = 'items';
     protected $fillable = ['category_id', 'item_name', 'item_description', 'item_image','additional'];
 
+    public function Category()
+    {
+        return $this->belongsTo('App\Models\Categories');
+    }
+
     public function Music(){
         return $this->hasOneThrough(Music::class,Item::class,'id','item_id');
     }
@@ -37,5 +42,9 @@ class Item extends Model
 
     public function IllustrationPrice(){
         return $this->hasManyThrough(IllustrationPrice::class,Item::class,'id','item_id');
+    }
+
+    public function GameDescription(){
+        return $this->hasOneThrough(GameDescription::class,Item::class,'id','item_id');
     }
 }

@@ -115,6 +115,14 @@
             </ul>
             <ul class="nav nav-treeview">
               <li class="nav-item">
+                <a href="{{ route('admin.games.index') }}" class="{{ request()->is('admin/items/games*') ? 'nav-link active' : 'nav-link' }}">
+                  <i class="nav-icon fas fa-gamepad"></i>
+                  <p>Games</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
                 <a href="{{ route('admin.gift-card.index') }}" class="{{ request()->is('admin/items/gift-card*') ? 'nav-link active' : 'nav-link' }}">
                   <i class="nav-icon fas fa-gift"></i>
                   <p>Gift Cards</p>
