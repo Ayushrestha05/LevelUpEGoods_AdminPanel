@@ -47,4 +47,8 @@ class Item extends Model
     public function GameDescription(){
         return $this->hasOneThrough(GameDescription::class,Item::class,'id','item_id');
     }
+
+    public function GamePrices(){
+        return $this->hasManyThrough(Games::class,Item::class,'id','item_id');
+    }
 }

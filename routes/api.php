@@ -35,6 +35,7 @@ Route::get('/items/music-data/{item_id}', [ItemAPIController::class, 'getMusicDa
 Route::get('/items/gift-card-data/{item_id}', [ItemAPIController::class, 'getGiftCardData']);
 Route::get('/items/figurine-data/{item_id}', [ItemAPIController::class, 'getFigurineData']);
 Route::get('/items/illustration-data/{item_id}', [ItemAPIController::class, 'getIllustrationData']);
+Route::get('/items/game-data/{item_id}', [ItemAPIController::class, 'getGameData']);
 
 //Private API Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {

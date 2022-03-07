@@ -206,7 +206,7 @@ class GameController extends Controller
                     $game->save();
                 }
             }
-            return redirect()->route('admin.games.index')->with('success','Game Added');
+            redirect()->route('admin.games.index')->with('success','Game Added');
         }
     }
 }
