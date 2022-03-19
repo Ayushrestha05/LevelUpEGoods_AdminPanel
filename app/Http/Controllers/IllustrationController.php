@@ -49,7 +49,7 @@ class IllustrationController extends Controller
         ]);
 
         $itemImage = time().preg_replace('/\s+/', '', $request->image->getClientOriginalName());
-        $request->image->move(public_path('images/illustration'), $itemImage);
+        $request->image->move(public_path('images/items/'), $itemImage);
 
         $item = new Item([
             'category_id' => 2,

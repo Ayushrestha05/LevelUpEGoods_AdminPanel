@@ -171,6 +171,7 @@ class ItemAPIController extends Controller
                 array_push($illustration_prices,[ 
                     'price' => $illustration_price->price,
                     'size' => $illustration_price->size,
+                    'id' => $illustration_price->id,
                 ]);
             }
 
