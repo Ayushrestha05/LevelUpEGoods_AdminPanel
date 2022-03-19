@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\CartItems;
+use App\Models\Platform;
 use Illuminate\Http\Request;
 
 class CartAPIController extends Controller
@@ -24,10 +25,54 @@ class CartAPIController extends Controller
         if($existItem->count() > 0){
             $item = $existItem->where('option',$request->option)->first();
             if($item != null){
-                $item->quantity += 1;
-                $item->save();
-
-                return response()->json(['message' => 'Quantity added by 1'], 201);
+                switch($item->Item->category_id){
+                    case 1:
+                        if($item->quantity > 4){
+                            return response()->json(['message' => 'Gift cards are limited to 5 per cart'], 400);
+                        }else{
+                            $item->quantity += 1;
+                            $item->save();
+                            return response()->json(['message' => 'Item quantity increased'], 200);
+                        }
+        
+                    case 2:
+                        if($item->quantity > 1){
+                            return response()->json(['message' => 'Illustrations are limited to 2 per cart'], 400);
+                        }else{
+                            $item->quantity += 1;
+                            $item->save();
+                            return response()->json(['message' => 'Item quantity increased'], 200);
+                        }
+        
+                    case 3:
+                        if($item->quantity > 2){
+                            return response()->json(['message' => 'Figurines are limited to 3 per cart'], 400);
+                        }else{
+                            $item->quantity += 1;
+                            $item->save();
+                            return response()->json(['message' => 'Item quantity increased'], 200);
+                        }
+        
+                    case 4:
+                    case 5:
+                    case 6:
+                        if($item->quantity > 1){
+                            return response()->json(['message' => 'Games are limited to 2 per cart'], 400);
+                        }else{
+                            $item->quantity += 1;
+                            $item->save();
+                            return response()->json(['message' => 'Item quantity increased'], 200);
+                        }
+        
+                    case 7:
+                        if($item->quantity > 4){
+                            return response()->json(['message' => 'Music is limited to 5 per cart'], 400);
+                        }else{
+                            $item->quantity += 1;
+                            $item->save();
+                            return response()->json(['message' => 'Item quantity increased'], 200);
+                        }
+                }
             }else{
                 $cart_item = new CartItems([
                     'cart_id' => $cart->id,
@@ -73,6 +118,7 @@ class CartAPIController extends Controller
                     'item_id' => $cart_item->item_id,
                     'item_name' => $cart_item->Item->item_name,
                     'item_image' => asset('images/items/'.$cart_item->Item->item_image),
+                    'category' => $cart_item->Item->category_id,
                     'quantity' => $cart_item->quantity,
                     'option' => $cart_item->option,
                     'current_price' => $this->getItemPrice($cart_item,$cart_item->option) * $cart_item->quantity,
@@ -93,12 +139,23 @@ class CartAPIController extends Controller
     }
 
     private static function getItemPrice(CartItems $cartItem, $option){
+ 
         switch($cartItem->Item->category_id){
             case 1:
                 return $cartItem->Item->GiftCard->where('card_type', $option)->first()->card_price;
+            
+            case 2:
+                return $cartItem->Item->IllustrationPrice->where('size',$option)->first()->price;
 
             case 3:
                 return $cartItem->Item->Figurine->figure_price;
+
+            case 4:
+            case 5:
+            case 6:
+                $price = $cartItem->Item->GamePrices->where('platform_id', Platform::all()->where('name',$option)->first()->id)->first()->price;
+                return $price;
+
             case 7:
                 if($option == 'physical'){
                     return $cartItem->Item->Music->physical_price;
@@ -127,9 +184,54 @@ class CartAPIController extends Controller
         if($cart_item == null){
             return response()->json(['message' => 'No cart item found'], 404);
         }else{
-            $cart_item->quantity += 1;
-            $cart_item->save();
-            return response()->json(['message' => 'Item quantity increased'], 200);
+            switch($cart_item->Item->category_id){
+                case 1:
+                    if($cart_item->quantity > 4){
+                        return response()->json(['message' => 'Gift cards are limited to 5 per cart'], 400);
+                    }else{
+                        $cart_item->quantity += 1;
+                        $cart_item->save();
+                        return response()->json(['message' => 'Item quantity increased'], 200);
+                    }
+    
+                case 2:
+                    if($cart_item->quantity > 1){
+                        return response()->json(['message' => 'Illustrations are limited to 2 per cart'], 400);
+                    }else{
+                        $cart_item->quantity += 1;
+                        $cart_item->save();
+                        return response()->json(['message' => 'Item quantity increased'], 200);
+                    }
+    
+                case 3:
+                    if($cart_item->quantity > 2){
+                        return response()->json(['message' => 'Figurines are limited to 3 per cart'], 400);
+                    }else{
+                        $cart_item->quantity += 1;
+                        $cart_item->save();
+                        return response()->json(['message' => 'Item quantity increased'], 200);
+                    }
+    
+                case 4:
+                case 5:
+                case 6:
+                    if($cart_item->quantity > 1){
+                        return response()->json(['message' => 'Games are limited to 2 per cart'], 400);
+                    }else{
+                        $cart_item->quantity += 1;
+                        $cart_item->save();
+                        return response()->json(['message' => 'Item quantity increased'], 200);
+                    }
+    
+                case 7:
+                    if($cart_item->quantity > 4){
+                        return response()->json(['message' => 'Music is limited to 5 per cart'], 400);
+                    }else{
+                        $cart_item->quantity += 1;
+                        $cart_item->save();
+                        return response()->json(['message' => 'Item quantity increased'], 200);
+                    }
+            }
         }
     }
 
@@ -149,4 +251,5 @@ class CartAPIController extends Controller
             }
         }
     }
+
 }
