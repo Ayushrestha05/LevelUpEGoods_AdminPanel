@@ -5,8 +5,12 @@ use App\Http\Controllers\API\CartAPIController;
 use App\Http\Controllers\API\CategoriesAPIController;
 use App\Http\Controllers\API\ItemAPIController;
 use App\Http\Controllers\API\MusicAPIController;
+use App\Http\Controllers\API\OrdersAPIController;
+use App\Http\Controllers\API\PaymentVerificationAPIController;
 use App\Http\Controllers\API\ReportQuestionAPIController;
+use App\Http\Controllers\API\ReviewAPIController;
 use App\Http\Controllers\API\UserReportAPIController;
+use App\Http\Controllers\API\WishlistAPIController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +40,7 @@ Route::get('/items/gift-card-data/{item_id}', [ItemAPIController::class, 'getGif
 Route::get('/items/figurine-data/{item_id}', [ItemAPIController::class, 'getFigurineData']);
 Route::get('/items/illustration-data/{item_id}', [ItemAPIController::class, 'getIllustrationData']);
 Route::get('/items/game-data/{item_id}', [ItemAPIController::class, 'getGameData']);
+Route::get('/reviews/{item_id}', [ReviewAPIController::class, 'getReviews']);
 
 //Private API Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -48,4 +53,16 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/increase', [CartAPIController::class, 'increaseQuantity']);
         Route::post('/decrease', [CartAPIController::class, 'decreaseQuantity']);
     });
+    Route::post('/add-review', [ReviewAPIController::class, 'addReview']);
+    Route::post('/add-wishlist',[WishlistAPIController::class,'addToWishlist']);
+    Route::post('/remove-wishlist',[WishlistAPIController::class,'removeFromWishlist']);
+    Route::get('/get-wishlist',[WishlistAPIController::class,'getWishlist']);
+    Route::get('/in-wishlist/{item_id}',[WishlistAPIController::class,'inWishlist']);
+    Route::post('/payment-verification',[PaymentVerificationAPIController::class,'validatePayment']);
+    Route::post('/get-orders',[OrdersAPIController::class,'getOrders']);
+    Route::get('/get-order-details/{order_id}',[OrdersAPIController::class,'getOrderDetails']);
+    Route::get('/get-user-review/{item_id}',[ReviewAPIController::class,'checkUserReview']);
+    Route::post('/update-user-review',[ReviewAPIController::class,'updateUserReview']);
+    Route::get('/get-user-reviews' , [ReviewAPIController::class, 'getUserReviews']);
+    Route::post('/delete-review', [ReviewAPIController::class, 'deleteReview']);
 });

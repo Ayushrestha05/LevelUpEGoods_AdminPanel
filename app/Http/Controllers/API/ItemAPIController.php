@@ -9,7 +9,11 @@ use Illuminate\Http\Request;
 class ItemAPIController extends Controller
 {
     public function getItems($category_id){
-        $items = Item::all()->where('category_id', $category_id);
+        if($category_id == 8){
+            $items = Item::all();
+        }else{
+            $items = Item::all()->where('category_id', $category_id);
+        }
         $response = [];
         foreach($items as $item){
             array_push($response,[

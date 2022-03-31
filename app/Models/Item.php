@@ -51,4 +51,8 @@ class Item extends Model
     public function GamePrices(){
         return $this->hasManyThrough(Games::class,Item::class,'id','item_id');
     }
+
+    public function Reviews(){
+        return $this->hasMany('App\Models\Review');
+    }
 }

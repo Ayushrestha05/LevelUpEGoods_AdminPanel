@@ -20,6 +20,8 @@ class CreateCartItemsTable extends Migration
             $table->integer('quantity')->default(1);
             $table->string('option')->nullable();
             $table->timestamps();
+            $table->foreign('cart_id')->references('id')->on('carts')->onDelete('cascade');
+            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
         });
     }
 

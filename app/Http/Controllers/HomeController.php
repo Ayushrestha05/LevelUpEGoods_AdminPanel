@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Report;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -27,6 +29,10 @@ class HomeController extends Controller
     }
 
     public function adminHome(){
-        return view('admin.home');
+        //new users this month
+        $newUsers = User::whereMonth('created_at', '=', date('m'))->count();
+        //total reports
+        $totalReports = Report::whereMonth('created_at', '=', date('m'))->count();
+        return view('admin.home', compact('newUsers', 'totalReports'));
     }
 }
