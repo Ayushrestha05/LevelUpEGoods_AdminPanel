@@ -3,11 +3,13 @@
 use App\Http\Controllers\API\AuthAPIController;
 use App\Http\Controllers\API\CartAPIController;
 use App\Http\Controllers\API\CategoriesAPIController;
+use App\Http\Controllers\API\ForgotPasswordController;
 use App\Http\Controllers\API\ItemAPIController;
 use App\Http\Controllers\API\MusicAPIController;
 use App\Http\Controllers\API\OrdersAPIController;
 use App\Http\Controllers\API\PaymentVerificationAPIController;
 use App\Http\Controllers\API\ReportQuestionAPIController;
+use App\Http\Controllers\API\ResetPasswordController;
 use App\Http\Controllers\API\ReviewAPIController;
 use App\Http\Controllers\API\UserReportAPIController;
 use App\Http\Controllers\API\WishlistAPIController;
@@ -41,6 +43,10 @@ Route::get('/items/figurine-data/{item_id}', [ItemAPIController::class, 'getFigu
 Route::get('/items/illustration-data/{item_id}', [ItemAPIController::class, 'getIllustrationData']);
 Route::get('/items/game-data/{item_id}', [ItemAPIController::class, 'getGameData']);
 Route::get('/reviews/{item_id}', [ReviewAPIController::class, 'getReviews']);
+Route::post('/forgot-password',[ForgotPasswordController::class, 'forgotPassword']);
+Route::post('/verify/pin',[ForgotPasswordController::class, 'verifyPin']);
+Route::post('/reset-password',[ResetPasswordController::class, 'resetPassword']
+);
 
 //Private API Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
