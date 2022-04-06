@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OrderItems;
+use App\Models\Platform;
 use App\Models\Report;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -30,9 +32,44 @@ class HomeController extends Controller
 
     public function adminHome(){
         //new users this month
-        $newUsers = User::whereMonth('created_at', '=', date('m'))->count();
+        $newUsers = User::whereMonth('created_at', '=', date('m'))->whereYear('created_at', '=', date('Y'))->count();
         //total reports
-        $totalReports = Report::whereMonth('created_at', '=', date('m'))->count();
-        return view('admin.home', compact('newUsers', 'totalReports'));
+        $totalReports = Report::whereMonth('created_at', '=', date('m'))->whereYear('created_at', '=', date('Y'))->count();
+        //total items sold
+        $totalItemsSold = OrderItems::whereMonth('created_at', '=', date('m'))->whereYear('created_at', '=', date('Y'))->sum('quantity');
+        //total revenue
+        $totalItems_Month = OrderItems::whereMonth('created_at', '=', date('m'))->whereYear('created_at', '=', date('Y'))->get();
+        $totalRevenue = 0;
+        foreach($totalItems_Month as $item){
+            $totalRevenue += ($item->quantity * $this->getItemPrice($item, $item->option));           
+        }
+        return view('admin.home', compact('newUsers', 'totalReports', 'totalItemsSold','totalRevenue'));
+    }
+
+    private static function getItemPrice(OrderItems $orderItems, $option){
+        
+        switch($orderItems->Item->category_id){
+            case 1:
+                return $orderItems->Item->GiftCard->where('card_type', $option)->first()->card_price;
+            
+            case 2:
+                return $orderItems->Item->IllustrationPrice->where('size',$option)->first()->price;
+
+            case 3:
+                return $orderItems->Item->Figurine->figure_price;
+
+            case 4:
+            case 5:
+            case 6:
+                $price = $orderItems->Item->GamePrices->where('platform_id', Platform::all()->where('name',$option)->first()->id)->first()->price;
+                return $price;
+
+            case 7:
+                if($option == 'physical'){
+                    return $orderItems->Item->Music->physical_price;
+                }else{
+                    return $orderItems->Item->Music->digital_price;
+                }
+        }
     }
 }

@@ -92,7 +92,10 @@ class IllustrationController extends Controller
      */
     public function show($id)
     {
-        //
+        $item = Item::where('id', $id)->first();
+        $illustrations = Illustration::where('item_id', $id)->get();
+        $illustration_prices = IllustrationPrice::where('item_id', $id)->get();
+        return view('admin.illustrations.show', compact('item', 'illustrations', 'illustration_prices'));
     }
 
     /**
@@ -103,7 +106,10 @@ class IllustrationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = Item::where('id', $id)->first();
+        $illustrations = Illustration::where('item_id', $id)->first();
+        $illustration_prices = IllustrationPrice::where('item_id', $id)->get();
+        return view('admin.illustrations.edit', compact('item', 'illustrations', 'illustration_prices'));
     }
 
     /**
@@ -115,7 +121,48 @@ class IllustrationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'illustration.*.size' => 'required',
+        ]);
+
+        if($request->image != null){
+            $itemImage = time().preg_replace('/\s+/', '', $request->image->getClientOriginalName());
+            $request->image->move(public_path('images/items/'), $itemImage);
+        }
+
+        $item = Item::where('id', $id)->first();
+        $item->item_name = $request->name;
+        $item->item_description = $request->description;
+        if($request->image != null){
+            $item->item_image = $itemImage;
+        }
+        $item->save();
+        
+        $illustration = Illustration::where('item_id', $id)->first();
+        $illustration->description = $request->description;   
+        $illustration->save();
+
+        foreach($request->illustration as $value){
+            // $value_item = new IllustrationPrice([
+            //     'size' => $value['size'],
+            //     'price' => $value['price'],
+            //     'item_id' => $item_id,
+            // ]);
+
+            // $value_item->save();
+            if($value['price'] == ''){
+                IllustrationPrice::where('item_id', $id)->where('size', $value['size'])->delete();
+            }else{
+                IllustrationPrice::updateOrCreate(
+                    ['item_id' => $id, 'size' => $value['size']],
+                    ['price' => $value['price']]
+                );
+            }
+        }
+
+        return redirect()->route('admin.illustrations.index')->with('success', 'Figurine Updated successfully');
     }
 
     /**
@@ -126,6 +173,7 @@ class IllustrationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Item::where('id', $id)->first();
+        $item->delete();
     }
 }

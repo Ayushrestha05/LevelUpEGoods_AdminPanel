@@ -155,7 +155,7 @@ class ItemAPIController extends Controller
             
             if($item->Illustration->user_id != null){
                 $illustration_details = [
-                    'illustration_description' => $item->Illustration->illustration_description,
+                    'illustration_description' => $item->Illustration->description,
                     'user_id' => $item->Illustration->user_id,
                     'user_name' => $item->Illustration->User->name,
                     'creator' => $item->Illustration->creator,

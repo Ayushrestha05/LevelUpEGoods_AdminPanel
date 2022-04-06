@@ -36,12 +36,6 @@
                                 <td><img src={{ asset('images/platforms/'.$platform->icon_filename) }} height=100 width=100 style="object-fit:scale-down;"></td>
                                 <td>
                                     <div class="d-flex">
-                                        <div class="mr-1">
-                                            <a href="{{ route('admin.platforms.show',$platform->id) }}"><button class="btn btn-secondary"><i class="fas fa-eye"></i></button></a>
-                                        </div>
-                                        <div class="mr-1">
-                                            <a href="{{ route('admin.platforms.edit',$platform->id) }}"><button class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button></a>
-                                        </div>
                                         <div>
                                             <form action="{{ route('admin.platforms.destroy',$platform->id) }}" method="POST">
                                                 @csrf

@@ -31,7 +31,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Dashboard</a>
+        <a href="{{ route('admin.admin-home') }}" class="nav-link">Dashboard</a>
       </li>
     </ul>
 
@@ -178,7 +178,58 @@
                 Platforms
               </p>
             </a>
-          </li>    
+          </li>   
+          
+          <li class="nav-item {{ request()->is('admin/orders*') ? 'menu-open' : 'menu-close' }}">
+            <a href="#" class="{{ request()->is('admin/orders*') ? 'nav-link active' : 'nav-link' }}">
+              <i class="nav-icon fas fa-shopping-bag"></i>
+              <p>
+                Orders
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.pending.index') }}" class="{{ request()->is('admin/orders/pending*') ? 'nav-link active' : 'nav-link' }}">
+                  <i class="nav-icon fas fa-shopping-bag"></i>
+                  <p>Pending Orders</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.completed.index') }}" class="{{ request()->is('admin/orders/completed*') ? 'nav-link active' : 'nav-link' }}">
+                  <i class="nav-icon fas fa-shopping-bag"></i>
+                  <p>
+                    Completed Orders
+                  </p>
+                </a>
+              </li>
+            </ul>
+          </li> 
+          <li class="nav-item {{ request()->is('admin/reward*') ? 'menu-open' : 'menu-close' }}">
+            <a href="#" class="{{ request()->is('admin/reward*') ? 'nav-link active' : 'nav-link' }}">
+              <i class="nav-icon fas fa-gift"></i>
+              <p>
+                Rewards
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.reward-items.index') }}" class="{{ request()->is('admin/reward-items') ? 'nav-link active' : 'nav-link' }}">
+                  <i class="nav-icon fas fa-gift"></i>
+                  <p>Reward Items</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.reward-history.index') }}" class="{{ request()->is('admin/reward-history') ? 'nav-link active' : 'nav-link' }}">
+                  <i class="nav-icon fas fa-gift"></i>
+                  <p>
+                    Reward History
+                  </p>
+                </a>
+              </li>
+            </ul>
+          </li>  
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

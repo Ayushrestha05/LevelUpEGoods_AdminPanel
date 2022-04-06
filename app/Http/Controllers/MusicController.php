@@ -98,7 +98,10 @@ class MusicController extends Controller
      */
     public function show($id)
     {
-        //
+        $item = Item::where('id',$id)->first();
+        $music = Music::where('item_id',$id)->first();
+        $musicTracks = MusicTrack::where('item_id',$id)->get();
+        return view('admin.music.show', compact('item','music','musicTracks'));
     }
 
     /**
@@ -109,7 +112,10 @@ class MusicController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = Item::where('id',$id)->first();
+        $music = Music::where('item_id',$id)->first();
+        $musicTracks = MusicTrack::where('item_id',$id)->get();
+        return view('admin.music.edit', compact('item','music','musicTracks'));
     }
 
     /**
@@ -121,7 +127,25 @@ class MusicController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if($request->album_image != null){
+            $albumImageName = time().preg_replace('/\s+/', '', $request->album_name).'.'.$request->album_image->getClientOriginalExtension();
+            $request->album_image->move(public_path('images/items'), $albumImageName);
+        }
+        $item = Item::where('id',$id)->first();
+        $item->item_name = $request->album_name;
+        $item->item_description = $request->album_artist;
+        if($request->album_image != null){
+            $item->item_image = $albumImageName;
+        }
+        $item->save();
+        
+        $music = Music::where('item_id',$id)->first();
+        $music->music_type = $request->album_type;
+        $music->digital_price = $request->digital_price;
+        $music->physical_price = $request->physical_price;
+        $music->save();
+
+        return redirect()->route('admin.music.index')->with('success', 'Music Updated Successfully');
     }
 
     /**

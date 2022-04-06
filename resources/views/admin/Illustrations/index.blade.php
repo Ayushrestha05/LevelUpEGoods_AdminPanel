@@ -30,23 +30,22 @@
                                 <td>{{ $item->id}}</td>
                                 <td>{{ $item->item_name }}</td>
                                 <td>
-                                    {{-- <div class="d-flex">
+                                    <div class="d-flex">
                                         <div class="mr-1">
-                                            <a href="{{ route('admin.music.show',$item->id) }}"><button class="btn btn-secondary"><i class="fas fa-eye"></i></button></a>
+                                            <a href="{{ route('admin.illustrations.show',$item->id) }}"><button class="btn btn-secondary"><i class="fas fa-eye"></i></button></a>
                                         </div>
                                         <div class="mr-1">
-                                            <a href="{{ route('admin.music.edit',$item->id) }}"><button class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button></a>
+                                            <a href="{{ route('admin.illustrations.edit',$item->id) }}"><button class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button></a>
                                         </div>
                                         <div>
-                                            <form action="{{ route('admin.music.destroy',$item->id) }}" method="POST">
+                                            <form action="{{ route('admin.illustrations.destroy',$item->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="fas fa-trash-alt"></i></button>
                                             </form>
                                         </div>
-                                    </div> --}}
-                                </td>
-                                
+                                    </div>
+                                </td>                                
                             </tr>
                             @endforeach
                         </tbody>

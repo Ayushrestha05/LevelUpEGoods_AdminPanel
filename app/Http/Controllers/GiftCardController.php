@@ -37,7 +37,6 @@ class GiftCardController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request);
         $request->validate([
             'name' => 'required|string',
             'description_text' => 'required|string',
@@ -68,7 +67,7 @@ class GiftCardController extends Controller
             $cardObject->save();
         }
 
-        return redirect()->route('admin.gift-card.index')->with('success', 'Music Added successfully');
+        return redirect()->route('admin.gift-card.index')->with('success', 'Gift Card Added successfully');
 
     }
 
@@ -80,7 +79,9 @@ class GiftCardController extends Controller
      */
     public function show($id)
     {
-        //
+        $item = Item::where('id', $id)->first();
+        $gift_card = GiftCard::where('item_id', $id)->get();
+        return view('admin.Gift-Cards.show',compact('item','gift_card'));
     }
 
     /**
@@ -91,7 +92,9 @@ class GiftCardController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = Item::where('id', $id)->first();
+        $gift_card = GiftCard::where('item_id', $id)->get();
+        return view('admin.Gift-Cards.edit',compact('item','gift_card'));
     }
 
     /**
@@ -103,7 +106,46 @@ class GiftCardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+            'description_text' => 'required|string',
+            'card.*.type' => 'required|string',
+            
+        ]);
+
+        if($request->image != null){
+            $imageName = time().preg_replace('/\s+/', '', $request->name).'.'.$request->image->getClientOriginalExtension();
+            $request->image->move(public_path('images/items'), $imageName);
+        }
+
+        $item = Item::where('id', $id)->first();
+        $item->item_name = $request->name;
+        $item->item_description = $request->description_text;
+        if($request->image != null){
+            $item->item_image = $imageName;
+        }
+        $item->save();
+        
+
+        foreach($request->card as $cardItem) {
+            // $cardObject = new GiftCard([
+            //     'item_id' => $item->id,
+            //     'card_type' => $cardItem['type'],
+            //     'card_price' => $cardItem['price'],
+            // ]);
+            // $cardObject->save();
+            if($cardItem['price'] == ''){
+                GiftCard::where('item_id', $item->id)->where('card_type', $cardItem['type'])->delete();
+            }else{
+                GiftCard::updateOrCreate(
+                    ['item_id' => $item->id, 'card_type' => $cardItem['type']],
+                    ['card_price' => $cardItem['price']]
+                );
+            }
+            
+        }
+
+        return redirect()->route('admin.gift-card.index')->with('success', 'Gift Card Updated successfully');
     }
 
     /**
@@ -114,6 +156,8 @@ class GiftCardController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Item::where('id', $id)->first();
+        $item->delete();
+        return redirect()->route('admin.gift-card.index')->with('success', 'Gift Card Deleted successfully');
     }
 }

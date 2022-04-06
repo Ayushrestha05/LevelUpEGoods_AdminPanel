@@ -13,6 +13,9 @@ use App\Http\Controllers\API\ResetPasswordController;
 use App\Http\Controllers\API\ReviewAPIController;
 use App\Http\Controllers\API\UserReportAPIController;
 use App\Http\Controllers\API\WishlistAPIController;
+use App\Http\Controllers\API\PointsAPIController;
+use App\Http\Controllers\API\RewardItemAPIController;
+use App\Http\Controllers\API\SearchAPIController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -45,8 +48,9 @@ Route::get('/items/game-data/{item_id}', [ItemAPIController::class, 'getGameData
 Route::get('/reviews/{item_id}', [ReviewAPIController::class, 'getReviews']);
 Route::post('/forgot-password',[ForgotPasswordController::class, 'forgotPassword']);
 Route::post('/verify/pin',[ForgotPasswordController::class, 'verifyPin']);
-Route::post('/reset-password',[ResetPasswordController::class, 'resetPassword']
-);
+Route::post('/reset-password',[ResetPasswordController::class, 'resetPassword']);
+Route::get('/reward-items', [RewardItemAPIController::class, 'getRewardItems']);
+Route::post('/search', [SearchAPIController::class, 'search']);
 
 //Private API Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -71,4 +75,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/update-user-review',[ReviewAPIController::class,'updateUserReview']);
     Route::get('/get-user-reviews' , [ReviewAPIController::class, 'getUserReviews']);
     Route::post('/delete-review', [ReviewAPIController::class, 'deleteReview']);
+    Route::get('/get-user-points', [PointsAPIController::class, 'getUserPoints']);
+    Route::post('/redeem-item',[RewardItemAPIController::class,'redeemReward']);
+    Route::get('/get-redeemed-items',[RewardItemAPIController::class,'getRewardHistory']);
 });

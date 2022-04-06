@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\CartItems;
 use App\Models\Order;
 use App\Models\OrderItems;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PaymentVerificationAPIController extends Controller
@@ -64,6 +65,12 @@ class PaymentVerificationAPIController extends Controller
                 $order_item->save();
             }
             $cart->delete();
+
+            //Adding points to user
+            $user = User::where('id',auth()->user()->id)->first();
+            $user->points = round((0.1* (double)$request->test_amount) + $user->points, 0);
+            $user->save();
+
             return response(['success' => 'Payment Successful'],200);
         }
         else{

@@ -73,7 +73,7 @@ class CategoriesController extends Controller
     {
         $request->validate([
             'category_name' => 'required|string',
-            'category_image' => 'required|max:120',
+            'category_image' => 'required',
             'category_color' => 'required'
         ]);
 

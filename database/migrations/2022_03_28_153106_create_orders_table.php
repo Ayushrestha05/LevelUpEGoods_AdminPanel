@@ -22,7 +22,7 @@ class CreateOrdersTable extends Migration
             $table->string('reciever_phone');
             $table->string('reciever_city');
             $table->string('reciever_address');
-            $table->text('sender_message');
+            $table->text('sender_message')->nullable();
             $table->boolean('hidden');
             $table->boolean('wrapped');
             $table->string('status')->default('pending');

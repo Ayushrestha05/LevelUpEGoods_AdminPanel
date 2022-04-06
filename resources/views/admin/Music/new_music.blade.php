@@ -44,41 +44,30 @@
                     <h3 class="card-title">Album Details</h3>
                 </div>
                 <div class="card-body">
-                    <div class="d-flex flex-row justify-content-between">
-                        <!--Data Entry Column-->
-                        <div class="d-flex flex-column w-75 mr-2">
-                            <div class="form-group">
-                                <label for="album_name">Album Type</label>
-                                <select class="custom-select rounded-0" name="album_type">
-                                    <option value="">Choose...</option>
-                                    <option value="Single">Single</option>
-                                    <option value="EP">EP</option>
-                                    <option value="Album">Album</option>
-                                    <option value="Remix">Remix</option>
-                                </select>
-                            </div>
-                            <div class="input-group d-flex flex-column">
-                                <label>Album Image</label>
-                                <div class="custom-file w-100 mb-3">
-                                    <input type="file" class="custom-file-input" id="album_image" name='album_image' onchange="loadFile(event)">
-                                    <label class="custom-file-label" for="album_image" id='labelvalue'>Choose file</label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="album_artist">Digital Price</label>
-                                <input type="text" class="form-control" name="digital_price" placeholder="Enter the Album's Digital Price">
-                            </div>
-                            <div class="form-group">
-                                <label for="album_artist">Physical Price</label>
-                                <input type="text" class="form-control" name="physical_price" placeholder="Enter the Album's Physical Price">
-                            </div>
+                    <div class="form-group">
+                        <label for="album_name">Album Type</label>
+                        <select class="custom-select rounded-0" name="album_type">
+                            <option value="">Choose...</option>
+                            <option value="Single">Single</option>
+                            <option value="EP">EP</option>
+                            <option value="Album">Album</option>
+                            <option value="Remix">Remix</option>
+                        </select>
+                    </div>
+                    <div class="input-group d-flex flex-column">
+                        <label>Album Image</label>
+                        <div class="custom-file w-100 mb-3">
+                            <input type="file" class="custom-file-input" id="album_image" name='album_image' onchange="loadFile(event)">
+                            <label class="custom-file-label" for="album_image" id='labelvalue'>Choose file</label>
                         </div>
-                        <!--Preview Column-->
-                        <div class="d-flex flex-column justify-content-end w-25">
-                            <img src="https://static.wikia.nocookie.net/c98c13ff-899b-47a3-9225-1f4a915fb493" height="200px" width="200px">
-                            <p>Album Name</p>
-                            <p>NPR 3000</p>
-                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="album_artist">Digital Price</label>
+                        <input type="text" class="form-control" name="digital_price" placeholder="Enter the Album's Digital Price">
+                    </div>
+                    <div class="form-group">
+                        <label for="album_artist">Physical Price</label>
+                        <input type="text" class="form-control" name="physical_price" placeholder="Enter the Album's Physical Price">
                     </div>
                 </div>
             </div>
