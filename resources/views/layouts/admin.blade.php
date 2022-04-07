@@ -228,7 +228,16 @@
                   </p>
                 </a>
               </li>
+               
             </ul>
+            <li class="nav-item">
+              <a href="{{ route('admin.notifications.index') }}" class="{{ request()->is('admin/notifications') ? 'nav-link active' : 'nav-link' }}">
+                <i class="nav-icon fas fa-gamepad"></i>
+                <p>
+                  Notifications
+                </p>
+              </a>
+            </li> 
           </li>  
         </ul>
       </nav>
