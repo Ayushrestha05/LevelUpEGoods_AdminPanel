@@ -17,7 +17,10 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('txn_id');
-            $table->double('amount');
+            $table->double('sub_total');
+            $table->integer('discount_percentage')->default(0);
+            $table->double('discount_amount')->default(0);
+            $table->double('total');
             $table->string('reciever_name');
             $table->string('reciever_phone');
             $table->string('reciever_city');

@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 class PaymentVerificationAPIController extends Controller
 {
     public function validatePayment(Request $request){
+        
         $args = http_build_query(array(
             'token' => $request->token,            
             'amount' => $request->amount,            
@@ -43,7 +44,10 @@ class PaymentVerificationAPIController extends Controller
             $order = new Order([
                 'user_id' => auth()->user()->id,
                 'txn_id' => $response["idx"],
-                'amount' => ($request->amount / 100),
+                'sub_total' => $request->sub_total,
+                'discount_percentage' => $request->discount_percentage,
+                'discount_amount' => $request->discount_amount,
+                'total' => $request->total,
                 'reciever_name' => $request->recieverName,
                 'reciever_phone' => $request->recieverPhone,
                 'reciever_city' => $request->recieverCity,

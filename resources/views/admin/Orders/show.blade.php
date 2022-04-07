@@ -109,8 +109,19 @@
         <div class="card-body">
             <div class="col">
                 <div class="row">
-                    <label style="margin-right: 10px">Amount:</label>
-                    <p>Nrs. {{ $order_details->amount }}</p>
+                    <label style="margin-right: 10px">Sub-Total:</label>
+                    <p>Nrs. {{ $order_details->sub_total }}</p>
+                </div>
+                @if ($order_details->discount_percentage > 0)
+                    <div class="row">
+                        <label style="margin-right: 10px">Discount ({{ $order_details->discount_percentage }}%):</label>
+                        <p>Nrs. {{ $order_details->discount_amount }}</p>
+                    </div>
+                    
+                @endif
+                <div class="row">
+                    <label style="margin-right: 10px">Paid Amount:</label>
+                    <p>Nrs. {{ $order_details->total }}</p>
                 </div>
                 <div class="row">
                     <label style="margin-right: 10px">Order Status:</label>

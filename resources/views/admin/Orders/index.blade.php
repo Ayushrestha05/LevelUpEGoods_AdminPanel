@@ -23,7 +23,7 @@
                                 <th>Token ID</th>
                                 <th>Buyer Name</th>
                                 <th>Reciever Name</th>
-                                <th>Amount</th>
+                                <th>Paid Amount</th>
                                 <th>Order Placed At</th>
                                 <th>Order Status</th>
                                 <th>Action</th>
@@ -36,7 +36,7 @@
                                 <td>{{ $order->txn_id }}</td>
                                 <td>{{ $order->User->name }}</td>
                                 <td>{{ $order->reciever_name }}</td>
-                                <td>{{ $order->amount }}</td>
+                                <td>{{ $order->total }}</td>
                                 <td>{{ $order->created_at }}</td>
                                 <td>{{ $order->status }}</td>
                                 <td>

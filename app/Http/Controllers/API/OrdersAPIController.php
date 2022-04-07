@@ -24,7 +24,7 @@ class OrdersAPIController extends Controller
                 'id' => $order->id,
                 'txn_id' => $order->txn_id,
                 'status' => $order->status,
-                'amount' => $order->amount,
+                'total' => $order->total,
                 'created_at' => $order->created_at->format('Y M d'),                
             ]);
           
@@ -56,7 +56,10 @@ class OrdersAPIController extends Controller
                 'id' => $order->id,
                 'txn_id' => $order->txn_id,
                 'status' => $order->status,
-                'amount' => $order->amount,
+                'sub_total' => $order->sub_total,
+                'discount_percentage' => $order->discount_percentage,
+                'discount_amount' => $order->discount_amount,
+                'total' => $order->total,
                 'created_at' => $order->created_at->format('Y M d h:m'),
                 'reciever_name' => $order->reciever_name,
                 'reciever_phone' => $order->reciever_phone,

@@ -135,7 +135,7 @@ class GiftCardController extends Controller
             // ]);
             // $cardObject->save();
             if($cardItem['price'] == ''){
-                GiftCard::where('item_id', $item->id)->where('card_type', $cardItem['type'])->delete();
+                
             }else{
                 GiftCard::updateOrCreate(
                     ['item_id' => $item->id, 'card_type' => $cardItem['type']],

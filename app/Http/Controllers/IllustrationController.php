@@ -153,7 +153,7 @@ class IllustrationController extends Controller
 
             // $value_item->save();
             if($value['price'] == ''){
-                IllustrationPrice::where('item_id', $id)->where('size', $value['size'])->delete();
+                
             }else{
                 IllustrationPrice::updateOrCreate(
                     ['item_id' => $id, 'size' => $value['size']],

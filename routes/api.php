@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\AuthAPIController;
 use App\Http\Controllers\API\CartAPIController;
 use App\Http\Controllers\API\CategoriesAPIController;
+use App\Http\Controllers\API\CheckoutSaleAPIController;
 use App\Http\Controllers\API\ForgotPasswordController;
 use App\Http\Controllers\API\ItemAPIController;
 use App\Http\Controllers\API\MusicAPIController;
@@ -51,6 +52,7 @@ Route::post('/verify/pin',[ForgotPasswordController::class, 'verifyPin']);
 Route::post('/reset-password',[ResetPasswordController::class, 'resetPassword']);
 Route::get('/reward-items', [RewardItemAPIController::class, 'getRewardItems']);
 Route::post('/search', [SearchAPIController::class, 'search']);
+Route::get('/get-checkout-sale',[CheckoutSaleAPIController::class,'getCheckoutSale']);
 
 //Private API Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
