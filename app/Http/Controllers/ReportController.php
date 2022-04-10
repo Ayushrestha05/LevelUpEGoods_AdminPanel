@@ -47,7 +47,8 @@ class ReportController extends Controller
      */
     public function show($id)
     {
-        //
+        $report = Report::where('id',$id)->first();
+        return view('admin.Report.show',compact('report'));
     }
 
     /**

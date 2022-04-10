@@ -113,7 +113,7 @@
                 <div class="col">
                     <div class="row">
                         <label style="margin-right: 10px">Amount:</label>
-                        <p>Nrs. {{ $order_details->amount }}</p>
+                        <p>Nrs. {{ $order_details->total }}</p>
                     </div>
                     <div class="row">
                         <label style="margin-right: 10px; margin-top:7px">Order Status:</label>

@@ -29,7 +29,7 @@
                                     <td>{{ $report->title }}</td>
                                     <td>
                                         <div class="mr-1">
-                                            <a href="{{ route('admin.user-reports.edit',$report->id) }}"><button class="btn btn-secondary"><i class="fas fa-eye"></i></button></a>
+                                            <a href="{{ route('admin.user-reports.show',$report->id) }}"><button class="btn btn-secondary"><i class="fas fa-eye"></i></button></a>
                                         </div>
                                     </td>          
                                 </tr>
