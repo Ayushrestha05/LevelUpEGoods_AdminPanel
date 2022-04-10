@@ -63,6 +63,7 @@ class OrdersAPIController extends Controller
                 'created_at' => $order->created_at->format('Y M d h:m'),
                 'reciever_name' => $order->reciever_name,
                 'reciever_phone' => $order->reciever_phone,
+                'reciever_email' => $order->reciever_email,
                 'reciever_city' => $order->reciever_city,
                 'reciever_address' => $order->reciever_address,
                 'sender_message' => $order->sender_message,

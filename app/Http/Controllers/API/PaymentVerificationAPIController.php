@@ -50,6 +50,7 @@ class PaymentVerificationAPIController extends Controller
                 'total' => $request->total,
                 'reciever_name' => $request->recieverName,
                 'reciever_phone' => $request->recieverPhone,
+                'reciever_email' => $request->recieverEmail,
                 'reciever_city' => $request->recieverCity,
                 'reciever_address' => $request->recieverAddress,
                 'sender_message' => $request->senderMessage,

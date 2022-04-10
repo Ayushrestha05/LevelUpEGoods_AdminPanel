@@ -23,6 +23,7 @@ class CreateOrdersTable extends Migration
             $table->double('total');
             $table->string('reciever_name');
             $table->string('reciever_phone');
+            $table->string('reciever_email');
             $table->string('reciever_city');
             $table->string('reciever_address');
             $table->text('sender_message')->nullable();
