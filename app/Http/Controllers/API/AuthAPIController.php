@@ -50,7 +50,7 @@ class AuthAPIController extends Controller
             return response(['message' => 'Invalid credentials'],401);
         }
         
-
+        $user->profile_image = asset('images/profile/'.$user->profile_image);
         $token = $user->createToken('mytoken')->plainTextToken;
 
         $response = [

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ArtistDashboardAPIController;
 use App\Http\Controllers\API\AuthAPIController;
 use App\Http\Controllers\API\CartAPIController;
 use App\Http\Controllers\API\CategoriesAPIController;
@@ -80,4 +81,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/get-user-points', [PointsAPIController::class, 'getUserPoints']);
     Route::post('/redeem-item',[RewardItemAPIController::class,'redeemReward']);
     Route::get('/get-redeemed-items',[RewardItemAPIController::class,'getRewardHistory']);
+    Route::get('/get-top-selling-item', [ArtistDashboardAPIController::class, 'getTopSellingItem']);
+    Route::get('/get-total-generated-income', [ArtistDashboardAPIController::class, 'getTotalGeneratedIncome']);
+    Route::get('/get-total-sold-items', [ArtistDashboardAPIController::class, 'getTotalSoldItems']);
 });

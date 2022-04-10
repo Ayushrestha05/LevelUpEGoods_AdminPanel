@@ -42,6 +42,7 @@ Route::prefix('admin')->name('admin.')->middleware('is_admin')->group(function (
     Route::resource('/reward-items',\App\Http\Controllers\RewardItemController::class,['except' => ['show']]);
     Route::resource('/reward-history', \App\Http\Controllers\RewardHistoryController::class, ['except' => ['create', 'store','show','destroy']]);
     Route::resource('/sale/checkout',\App\Http\Controllers\CheckoutSaleController::class);
+    Route::resource('/artist',\App\Http\Controllers\ArtistController::class);
     // Notification Controllers
     Route::resource('/notifications', \App\Http\Controllers\PushNotificationController::class);
     Route::post('send',[\App\Http\Controllers\PushNotificationController::class, 'bulksend'])->name('bulksend');

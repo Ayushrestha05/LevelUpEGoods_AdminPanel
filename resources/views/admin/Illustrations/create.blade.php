@@ -63,7 +63,7 @@
                                 <select name="select_box" id="select_box" class="form-control">
                                     <option value=null>Select User</option>
                                     @php
-                                        DB::table('users')->orderBy('id', 'desc')->get()->each(function($user){
+                                        DB::table('users')->where('is_artist',1)->orderBy('id', 'desc')->get()->each(function($user){
                                             echo "<option value='".$user->id."'>".$user->email."</option>";
                                         });
                                     @endphp

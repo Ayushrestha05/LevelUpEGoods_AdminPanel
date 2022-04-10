@@ -256,6 +256,14 @@
                             
             </ul>            
           </li> 
+          <li class="nav-item">
+            <a href="{{ route('admin.artist.index') }}" class="{{ request()->is('admin/artist') ? 'nav-link active' : 'nav-link' }}">
+              <i class="nav-icon fas fa-paint-brush"></i>
+              <p>
+                Artist
+              </p>
+            </a>
+          </li> 
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
