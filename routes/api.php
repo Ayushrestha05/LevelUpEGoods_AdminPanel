@@ -6,6 +6,7 @@ use App\Http\Controllers\API\CartAPIController;
 use App\Http\Controllers\API\CategoriesAPIController;
 use App\Http\Controllers\API\CheckoutSaleAPIController;
 use App\Http\Controllers\API\ForgotPasswordController;
+use App\Http\Controllers\API\HomeScreenAPIController;
 use App\Http\Controllers\API\ItemAPIController;
 use App\Http\Controllers\API\MusicAPIController;
 use App\Http\Controllers\API\OrdersAPIController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\API\WishlistAPIController;
 use App\Http\Controllers\API\PointsAPIController;
 use App\Http\Controllers\API\RewardItemAPIController;
 use App\Http\Controllers\API\SearchAPIController;
+use App\Http\Controllers\API\NotificationHistoryAPIController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -54,6 +56,11 @@ Route::post('/reset-password',[ResetPasswordController::class, 'resetPassword'])
 Route::get('/reward-items', [RewardItemAPIController::class, 'getRewardItems']);
 Route::post('/search', [SearchAPIController::class, 'search']);
 Route::get('/get-checkout-sale',[CheckoutSaleAPIController::class,'getCheckoutSale']);
+Route::get('/get-notifications',[NotificationHistoryAPIController::class,'getNotificationHistory']);
+Route::get('/get-new-items',[HomeScreenAPIController::class,'newlyAddedItems']);
+Route::get('/get-upcoming-games',[HomeScreenAPIController::class,'getUpcomingGames']);
+Route::get('/get-ads',[HomeScreenAPIController::class,'getAds']);
+Route::get('get-artist',[HomeScreenAPIController::class,'getArtist']);
 
 //Private API Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -84,4 +91,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/get-top-selling-item', [ArtistDashboardAPIController::class, 'getTopSellingItem']);
     Route::get('/get-total-generated-income', [ArtistDashboardAPIController::class, 'getTotalGeneratedIncome']);
     Route::get('/get-total-sold-items', [ArtistDashboardAPIController::class, 'getTotalSoldItems']);
+    Route::get('/get-user-details',[AuthAPIController::class,'getUser']);
+    Route::get('/get-artist-items',[ArtistDashboardAPIController::class,'getArtistItems']);
 });

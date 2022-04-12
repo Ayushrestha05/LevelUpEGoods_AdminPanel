@@ -123,6 +123,7 @@
                                 <option value="pending" <?php if($order_details->status=="pending") echo 'selected="selected"'; ?>>Pending</option>
                                 <option value="completed" <?php if($order_details->status=="completed") echo 'selected="selected"'; ?>>Completed</option>
                             </select>
+                        </div>
                     </div>
                     
                 </div>

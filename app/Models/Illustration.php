@@ -14,4 +14,8 @@ class Illustration extends Model
     public function User(){
         return $this->belongsTo(User::class,'user_id');
     }
+
+    public function Item(){
+        return $this->belongsTo(Item::class,'item_id');
+    }
 }

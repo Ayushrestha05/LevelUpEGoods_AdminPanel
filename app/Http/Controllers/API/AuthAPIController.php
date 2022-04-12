@@ -66,4 +66,10 @@ class AuthAPIController extends Controller
         $request->user()->tokens()->delete();
         return response(['message' => 'Successfully logged out']);
     }
+
+    public function getUser(Request $request){
+        $user = $request->user();
+        $user->profile_image = asset('images/profile/'.$user->profile_image);
+        return response($user);
+    }
 }

@@ -263,6 +263,14 @@
                 Artist
               </p>
             </a>
+          </li>           
+          <li class="nav-item">
+            <a href="{{ route('admin.ads.index') }}" class="{{ request()->is('admin/ads') ? 'nav-link active' : 'nav-link' }}">
+              <i class="nav-icon fab fa-buysellads"></i>
+              <p>
+                Ads
+              </p>
+            </a>
           </li> 
         </ul>
       </nav>
