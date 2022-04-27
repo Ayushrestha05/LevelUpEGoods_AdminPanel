@@ -100,4 +100,19 @@ class ReviewAPIController extends Controller
             return response()->json(['message' => 'Review not found'],404);
         }
     }
+
+    public function getAllReviews($item_id){
+        $reviews = Review::where('item_id', $item_id)->get();
+        $review_list = [];
+        foreach($reviews as $review){
+            array_push($review_list,[
+                'id' => $review->id,
+                'user' => $review->User->name,
+                'review' => $review->review,
+                'rating' => $review->rating,
+                'created_at' => $review->created_at->format('d M Y'),
+            ]);
+        }
+        return response($review_list,200);
+    }
 }

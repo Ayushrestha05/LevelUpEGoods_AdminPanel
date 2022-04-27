@@ -40,13 +40,7 @@
                                         <div class="mr-1">
                                             <a href="{{ route('admin.reward-history.edit',$item->id) }}"><button class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button></a>
                                         </div>
-                                        <div>
-                                            <form action="{{ route('admin.reward-history.destroy',$item->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="fas fa-trash-alt"></i></button>
-                                            </form>
-                                        </div>
+                                        
                                     </div>
                                 </td>
                                 

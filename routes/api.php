@@ -60,7 +60,8 @@ Route::get('/get-notifications',[NotificationHistoryAPIController::class,'getNot
 Route::get('/get-new-items',[HomeScreenAPIController::class,'newlyAddedItems']);
 Route::get('/get-upcoming-games',[HomeScreenAPIController::class,'getUpcomingGames']);
 Route::get('/get-ads',[HomeScreenAPIController::class,'getAds']);
-Route::get('get-artist',[HomeScreenAPIController::class,'getArtist']);
+Route::get('/get-artist',[HomeScreenAPIController::class,'getArtist']);
+Route::get('/get-all-reviews/{item_id}',[ReviewAPIController::class,'getAllReviews']);
 
 //Private API Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -85,6 +86,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/update-user-review',[ReviewAPIController::class,'updateUserReview']);
     Route::get('/get-user-reviews' , [ReviewAPIController::class, 'getUserReviews']);
     Route::post('/delete-review', [ReviewAPIController::class, 'deleteReview']);
+
     Route::get('/get-user-points', [PointsAPIController::class, 'getUserPoints']);
     Route::post('/redeem-item',[RewardItemAPIController::class,'redeemReward']);
     Route::get('/get-redeemed-items',[RewardItemAPIController::class,'getRewardHistory']);
@@ -93,4 +95,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/get-total-sold-items', [ArtistDashboardAPIController::class, 'getTotalSoldItems']);
     Route::get('/get-user-details',[AuthAPIController::class,'getUser']);
     Route::get('/get-artist-items',[ArtistDashboardAPIController::class,'getArtistItems']);
+    Route::post('/edit-user-profile',[AuthAPIController::class,'editUserProfile']);
 });

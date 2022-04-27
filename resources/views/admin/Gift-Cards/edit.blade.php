@@ -69,7 +69,7 @@
                         @endforeach --}}
                         @for ($i=0;$i<count($gift_card);$i++)
                         <tr>
-                            <td><input type="text" class="form-control" name="card[{{ $i }}][type]" placeholder="Enter Card Type" value="{{ $gift_card[$i]->card_type }}" disabled></td>
+                            <td><input type="text" class="form-control" name="card[{{ $i }}][type]" placeholder="Enter Card Type" value="{{ $gift_card[$i]->card_type }}" readonly></td>
                             <td><input type="text" class="form-control" name="card[{{ $i }}][price]" placeholder="Enter Card Price" value="{{ $gift_card[$i]->card_price }}"></td>
                             @if ($i == count($gift_card)-1)
                             <td><button type="button" name="add" id="dynamic-ar" class="btn btn-primary"><i class="right fas fa-plus mr-2"></i>Add Card Type</button></td>

@@ -73,7 +73,7 @@ class PaymentVerificationAPIController extends Controller
 
             //Adding points to user
             $user = User::where('id',auth()->user()->id)->first();
-            $user->points = round((0.1* (double)$request->test_amount) + $user->points, 0);
+            $user->points = round((0.1* (double)$request->total) + $user->points, 0);
             $user->save();
 
             return response(['success' => 'Payment Successful'],200);

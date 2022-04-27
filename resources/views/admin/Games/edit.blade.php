@@ -41,7 +41,7 @@
                     </div>
                     <div class="form-group">
                         <label>Release Date</label>
-                        <input type="date" class="form-control" name='release_date' value="{{ $game_description->release_date }}"> 
+                        <input type="date" class="form-control" name='release_date' value="{{ $game_description->release_date->format('Y-m-d') }}"> 
                     </div>
                     <div class="input-group">
                         <label>Game Cover Image</label>

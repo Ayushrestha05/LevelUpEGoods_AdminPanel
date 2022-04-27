@@ -26,6 +26,8 @@
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
                         <a href="{{ url('/admin/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Dashboard</a>
+                        <a href="#" class="text-sm text-gray-700 dark:text-gray-500 underline" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">Logout</a>
                     @else
                         <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
 
@@ -128,5 +130,9 @@
                 </div>
             </div>
         </div>
+        <!-- Hidden Logout Form -->
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
     </body>
 </html>

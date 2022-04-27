@@ -175,5 +175,7 @@ class IllustrationController extends Controller
     {
         $item = Item::where('id', $id)->first();
         $item->delete();
+
+        return redirect()->route('admin.illustrations.index')->with('success', 'Figurine Deleted successfully');
     }
 }

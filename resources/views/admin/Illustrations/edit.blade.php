@@ -75,7 +75,7 @@
                         </tr>
                         @for ($i=0; $i < count($illustration_prices); $i++)
                             <tr>
-                                <td><input type="text" class="form-control" name="illustration[{{ $i }}][size]" placeholder="Enter Size" value="{{ $illustration_prices[$i]->size }}" disabled></td>
+                                <td><input type="text" class="form-control" name="illustration[{{ $i }}][size]" placeholder="Enter Size" value="{{ $illustration_prices[$i]->size }}" readonly></td>
                                 <td><input type="text" class="form-control" name="illustration[{{ $i }}][price]" placeholder="Enter Price" value="{{ $illustration_prices[$i]->price }}"></td>
                                 @if ($i == count($illustration_prices)-1)
                             <td><button type="button" name="add" id="dynamic-ar" class="btn btn-primary"><i class="right fas fa-plus mr-2"></i>Add Price</button></td>

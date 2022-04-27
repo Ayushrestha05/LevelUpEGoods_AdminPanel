@@ -21,7 +21,7 @@
         @method('PUT')
         <div class="card">
             <div class="card-header d-flex flex-column">
-                <h3>Updated Existing Figurine</h3>
+                <h3>Update Existing Figurine</h3>
             </div>
             <div class="card card-primary m-3 ">
                 <div class="card-header">

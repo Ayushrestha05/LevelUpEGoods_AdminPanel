@@ -42,7 +42,7 @@
                                             <a href="{{ route('admin.reward-items.edit',$item->id) }}"><button class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button></a>
                                         </div>
                                         <div>
-                                            <form action="{{ route('admin.platforms.destroy',$item->id) }}" method="POST">
+                                            <form action="{{ route('admin.reward-items.destroy',$item->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="fas fa-trash-alt"></i></button>

@@ -153,6 +153,7 @@ class CartAPIController extends Controller
             case 4:
             case 5:
             case 6:
+         
                 $price = $cartItem->Item->GamePrices->where('platform_id', Platform::all()->where('name',$option)->first()->id)->first()->price;
                 return $price;
 

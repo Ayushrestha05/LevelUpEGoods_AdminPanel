@@ -72,4 +72,21 @@ class AuthAPIController extends Controller
         $user->profile_image = asset('images/profile/'.$user->profile_image);
         return response($user);
     }
+
+    public function editUserProfile(Request $request){
+        $user = $request->user();
+        error_log($request->name);
+        error_log($request->hasFile('image'));
+        if($request->has('name')){
+            $user->name = $request->name;
+        }
+        if($request->hasFile('image')){
+            error_log('image found');
+            $itemImage = time().preg_replace('/\s+/', '', $request->file('image')->getClientOriginalName());
+            $request->file('image')->move(public_path('images/profile/'), $itemImage);
+            $user->profile_image = $itemImage;         
+        }
+        $user->save();
+        return response($user,200);
+    }
 }

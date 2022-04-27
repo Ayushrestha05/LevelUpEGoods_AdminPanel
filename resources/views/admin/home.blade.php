@@ -65,5 +65,39 @@
            
             
           </div>
+          <div class="card">
+            <div class="card-header border-0">
+              <h3 class="card-title">Top Selling Products</h3>
+            </div>
+            <div class="card-body table-responsive p-0">
+              <table class="table table-striped table-valign-middle">
+                <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Option</th>
+                  
+                  <th>Sales</th>
+                  
+                </tr>
+                </thead>
+                <tbody>
+                @foreach ($topSellingItems as $topItem)
+                  <tr>
+                    <td>
+                      <img src="{{ asset('images/items/'.$topItem->item_image) }}" alt="Product 1" class="img img-size-64 mr-2">
+                      {{ $topItem->item_name }}
+                    </td>
+                    <td>{{ $topItem->option }}</td>
+                    
+                    <td>                    
+                      {{ $topItem->sales }} Sold
+                    </td>                  
+                  </tr>
+                @endforeach
+                
+                </tbody>
+              </table>
+            </div>
+          </div>
     </div>
 @endsection

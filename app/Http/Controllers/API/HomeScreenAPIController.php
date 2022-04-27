@@ -62,13 +62,19 @@ class HomeScreenAPIController extends Controller
 
     public function getArtist(){
         $artist = User::orderBy('updated_at', 'desc')->where('is_artist',1)->first();
-        $artist->profile_image = asset('images/profile/'.$artist->profile_image);
-        $illustrations = Illustration::where('user_id',$artist->id)->get();
-        $response = [];
-        foreach($illustrations as $illustration){
-            $illustration->Item->item_image = asset('images/items/'.$illustration->Item->item_image);
-            array_push($response,$illustration->Item);
+        if($artist != null){
+            
+            $artist->profile_image = asset('images/profile/'.$artist->profile_image);
+            
+            $illustrations = Illustration::where('user_id',$artist->id)->get();
+            $response = [];
+            foreach($illustrations as $illustration){
+                $illustration->Item->item_image = asset('images/items/'.$illustration->Item->item_image);
+                array_push($response,$illustration->Item);
+            }
+            return response(['artist'=> $artist, 'illustrations'=>$response],200);
+        }else{
+            return response([],404);
         }
-        return response(['artist'=> $artist, 'illustrations'=>$response],200);
     }
 }

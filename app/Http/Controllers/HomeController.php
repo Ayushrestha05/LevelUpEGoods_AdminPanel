@@ -7,6 +7,7 @@ use App\Models\Platform;
 use App\Models\Report;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -43,7 +44,13 @@ class HomeController extends Controller
         foreach($totalItems_Month as $item){
             $totalRevenue += ($item->quantity * $this->getItemPrice($item, $item->option));           
         }
-        return view('admin.home', compact('newUsers', 'totalReports', 'totalItemsSold','totalRevenue'));
+        //top selling items
+        $topSellingItems = DB::select('SELECT i.item_name, i.item_image,i.item_image,oi.option, COUNT(i.id) AS "sales" FROM `order_items`oi
+        JOIN `items`i on i.id = oi.item_id
+        GROUP BY oi.item_id, oi.option
+        ORDER BY sales DESC
+        LIMIT 5');
+        return view('admin.home', compact('newUsers', 'totalReports', 'totalItemsSold','totalRevenue','topSellingItems'));
     }
 
     private static function getItemPrice(OrderItems $orderItems, $option){

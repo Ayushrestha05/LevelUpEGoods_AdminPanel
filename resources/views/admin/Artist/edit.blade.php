@@ -20,7 +20,7 @@
         @method('PUT')
         <div class="card">
             <div class="card-header d-flex flex-column">
-                <h3>Add new Artist</h3>
+                <h3>Edit existing Artist</h3>
             </div>
             <div class="card card-primary m-3 ">
                 <div class="card-header">
@@ -53,6 +53,7 @@
             </div>
         </div>
     </form>
+
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

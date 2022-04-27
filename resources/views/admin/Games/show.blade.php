@@ -13,7 +13,7 @@
                 <label style="margin-right: 10px">Game Description:</label>
                 <p>{{ $item->item_description }}</p>
                 <label style="margin-right: 10px">Game Release Date:</label>
-                <p>{{ $game_description->release_date }}</p>
+                <p>{{ $game_description->release_date->format(' d F Y') }}</p>
             </div>
         </div>
     </div>
